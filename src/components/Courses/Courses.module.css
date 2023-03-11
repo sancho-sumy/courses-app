@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  height: 100%;
+	padding: 25px;
+	border: 1px solid darkolivegreen;
+}
+
+.header {
+  width: 100%;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: minmax(200px, 1fr) auto;
+}
