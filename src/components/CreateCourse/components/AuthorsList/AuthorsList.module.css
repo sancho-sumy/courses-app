@@ -1,0 +1,14 @@
+.listItem {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0 100px;
+  margin-bottom: 10px;
+}
+
+.name {
+  min-width: 50%;
+}
+

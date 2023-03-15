@@ -8,7 +8,7 @@ export const ADD_NEW_COURSE_BTN_TEXT = 'Add new course';
 export const CREATE_COURSE_BTN_TEXT = 'Create course';
 export const CREATE_AUTHOR_BTN_TEXT = 'Create author';
 export const ADD_AUTHOR_BTN_TEXT = 'Add author';
-export const DELTE_AUTHOR_BTN_TEXT = 'Delete author';
+export const DELETE_AUTHOR_BTN_TEXT = 'Delete author';
 
 // Mocked data
 export const mockedCoursesList = [

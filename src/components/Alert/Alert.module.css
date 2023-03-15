@@ -1,0 +1,54 @@
+.messageList {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  list-style: none;
+  text-align: center;
+  padding: 10px 50px;
+  animation: slideInTop 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.slideInTop {
+  animation: slideInTop 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.inAnimation {
+  top: 0;
+  opacity: 1;
+  transition: all 1.8s;
+}
+
+.success {
+  color: darkgreen;
+  background-color: rgb(159, 224, 159);
+}
+
+.error {
+	color: red;
+	background-color: rgb(229, 189, 189);
+  transition: all 1s;
+}
+
+@keyframes slideInTop {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutTop {
+  0% {
+    top: -0;
+    opacity: 1;
+  }
+  100% {
+    top: -100%;
+    opacity: 0;
+  }
+}
+
+

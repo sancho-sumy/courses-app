@@ -1,10 +1,16 @@
-import Button from '../../../../common/Button/Button';
+import { Button } from '../../../../common';
 
 import styles from './CourseCard.module.css';
 
 import { SHOW_COURSE_BTN_TEXT } from '../../../../constants';
 
-function CourseCard({ title, description, authors, duration, creationDate }) {
+export function CourseCard({
+	title,
+	description,
+	authors,
+	duration,
+	creationDate,
+}) {
 	return (
 		<div className={styles.course}>
 			<div className={styles.description}>
@@ -28,4 +34,3 @@ function CourseCard({ title, description, authors, duration, creationDate }) {
 		</div>
 	);
 }
-export default CourseCard;

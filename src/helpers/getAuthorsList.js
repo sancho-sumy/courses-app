@@ -1,11 +1,8 @@
-import { mockedAuthorsList } from '../constants';
-
-export default function getAuthors(listOfAuthorsIds) {
-	return listOfAuthorsIds
+export default function getAuthors(authorsId, authorList) {
+	return authorsId
 		.map(
 			(authorId) =>
-				mockedAuthorsList.find((author) => author.id === authorId)?.name ||
-				'N/A'
+				authorList?.find((author) => author.id === authorId)?.name || 'N/A'
 		)
 		.join(', ');
 }

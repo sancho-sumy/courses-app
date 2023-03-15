@@ -1,4 +1,4 @@
-import { Button } from '../../common/Button';
+import { Button } from '../../common';
 import { Logo } from './components';
 
 import { LOGOUT_BTN_TEXT, GUEST_NAME } from '../../constants';

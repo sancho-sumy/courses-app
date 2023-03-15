@@ -1,3 +1,10 @@
-export default function pipeDuration(duration) {
-	return Math.floor(duration / 60) + ':' + ('00' + (duration % 60)).slice(-2);
+export default function pipeDuration(totalMinutes) {
+	const minutes = totalMinutes % 60;
+	const hours = Math.floor(totalMinutes / 60);
+
+	return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
+}
+
+function padTo2Digits(num) {
+	return num.toString().padStart(2, '0');
 }

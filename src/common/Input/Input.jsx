@@ -1,4 +1,4 @@
-function Input({
+export function Input({
 	id,
 	name,
 	type,
@@ -9,7 +9,7 @@ function Input({
 }) {
 	return (
 		<div>
-			{labelText && <label htmlFor={name}>{labelText}</label>}
+			{labelText && <label htmlFor={id}>{labelText}</label>}
 			<input
 				id={id}
 				type={type || 'text'}
@@ -21,4 +21,3 @@ function Input({
 		</div>
 	);
 }
-export default Input;

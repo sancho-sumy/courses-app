@@ -1,9 +1,16 @@
 import styles from './Textarea.module.css';
 
-function Textarea({ id, name, value, placeholderText, labelText, onChange }) {
+export function Textarea({
+	id,
+	name,
+	value,
+	placeholderText,
+	labelText,
+	onChange,
+}) {
 	return (
 		<div className={styles.container}>
-			{labelText && <label htmlFor={name}>{labelText}</label>}
+			{labelText && <label htmlFor={id}>{labelText}</label>}
 			<textarea
 				id={id}
 				name={name}
@@ -14,4 +21,3 @@ function Textarea({ id, name, value, placeholderText, labelText, onChange }) {
 		</div>
 	);
 }
-export default Textarea;

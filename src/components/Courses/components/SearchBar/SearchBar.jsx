@@ -1,20 +1,18 @@
-import Button from '../../../../common/Button/Button';
-import Input from '../../../../common/Input/Input';
+import { Button, Input } from '../../../../common';
 import { SEARCH_BTN_TEXT } from '../../../../constants';
 
 import styles from './SearchBar.module.css';
 
-function SearchBar({ onSubmit }) {
+export function SearchBar({ onSubmit, onChange }) {
 	return (
-		<div className={styles.container}>
+		<form className={styles.container} onSubmit={onSubmit}>
 			<Input
 				placeholderText='Enter course name...'
 				name='search'
 				id='search'
-				onSubmit={onSubmit}
+				onChange={onChange}
 			/>
-			<Button buttonText={SEARCH_BTN_TEXT} />
-		</div>
+			<Button buttonText={SEARCH_BTN_TEXT} type={'submit'} />
+		</form>
 	);
 }
-export default SearchBar;

@@ -1,7 +1,5 @@
 import logo from '../../../../assets/images/logo.png';
 
-function Logo() {
+export function Logo() {
 	return <img src={logo} alt='App Logo' />;
 }
-
-export default Logo;
