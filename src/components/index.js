@@ -1,4 +1,9 @@
 export { Courses } from './Courses';
 export { CreateCourse } from './CreateCourse';
+export { CourseInfo } from './CourseInfo';
 export { Header } from './Header';
 export { Alert } from './Alert';
+export { Login } from './Login';
+export { Registration } from './Registration';
+export { RootLayout } from './RootLayout';
+export { ErrorPage } from './ErrorPage';
