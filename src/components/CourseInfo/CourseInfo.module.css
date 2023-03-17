@@ -1,0 +1,39 @@
+.courseInfo {
+	display: grid;
+	grid-template-columns: 4fr minmax(250px, 2fr);
+	gap: 30px 150px;
+	padding: 20px;
+	border: 1px solid darkolivegreen;
+	margin-top: 25px;
+}
+
+.courseInfo ul {
+  padding: 0 15px;
+  list-style: none;
+}
+
+.courseInfo ul li{
+  margin-bottom: 10px;
+}
+
+.title {
+  grid-column: span 2;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.controls {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+}
+
+.info p {
+  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+
+
