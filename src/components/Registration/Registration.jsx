@@ -21,6 +21,7 @@ export async function action({ params, request }) {
 			'Content-Type': 'application/json',
 		},
 	});
+
 	const result = await response;
 
 	console.log(result);
@@ -29,9 +30,9 @@ export async function action({ params, request }) {
 		return response;
 	}
 
-	// if (!response.ok) {
-	// 	throw json({ message: "Could't save event" }, { state: 500 });
-	// }
+	if (!response.ok) {
+		throw json({ message: "Could't save user" }, { state: 500 });
+	}
 
 	return redirect('/login');
 }
