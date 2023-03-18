@@ -1,16 +1,23 @@
-import { useEffect, useState } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	RouterProvider,
+	redirect,
+} from 'react-router-dom';
 
 import {
 	CreateCourse,
 	Courses,
-	Alert,
+	coursesLoader,
 	RootLayout,
 	Registration,
+	registrationAction,
 	Login,
+	loginAction,
 	CourseInfo,
 	ErrorPage,
 } from './components';
+
+import { checkAuthToken } from './utils/auth';
 
 import './App.css';
 
@@ -20,10 +27,12 @@ const router = createBrowserRouter([
 		element: <RootLayout />,
 		errorElement: <ErrorPage />,
 		children: [
+			{ index: 'true', loader: () => redirect('/courses') },
 			{
 				path: 'courses',
+				loader: checkAuthToken,
 				children: [
-					{ index: true, element: <Courses /> },
+					{ index: true, element: <Courses />, loader: coursesLoader },
 					{ path: 'add', element: <CreateCourse /> },
 					{ path: ':courseId', element: <CourseInfo /> },
 				],
@@ -31,34 +40,21 @@ const router = createBrowserRouter([
 			{
 				path: 'registration',
 				element: <Registration />,
+				action: registrationAction,
 			},
 			{
 				path: 'login',
 				element: <Login />,
+				action: loginAction,
 			},
 		],
 	},
 ]);
 
 function App() {
-	// const [addCourse, setAddCourse] = useState(false);
-	const [alert, setAlert] = useState(null);
-
-	useEffect(() => {
-		const timer = setTimeout(() => setAlert(null), 5000);
-		return () => clearTimeout(timer);
-	}, [alert]);
-
 	return (
 		<>
-			{alert && <Alert alert={alert} />}
 			<RouterProvider router={router} />
-			{/* <Header />
-			{!addCourse ? (
-				<Courses setAddCourse={setAddCourse} setAlert={setAlert} />
-			) : (
-				<CreateCourse setAddCourse={setAddCourse} setAlert={setAlert} />
-			)} */}
 		</>
 	);
 }

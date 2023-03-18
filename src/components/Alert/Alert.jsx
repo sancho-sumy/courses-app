@@ -4,22 +4,22 @@ import clsx from 'clsx';
 
 import styles from './Alert.module.css';
 
-function Alert({ alert }) {
+function Alert({ messages, type = 'success' }) {
 	const [inAnimation, setInAnimation] = useState(false);
 
 	useLayoutEffect(() => {
 		setInAnimation(true);
 	}, []);
 
-	const messageList = alert?.messages.map((message) => {
+	const messageList = messages?.map((message) => {
 		return <li key={uuidv4()}>{message}</li>;
 	});
 	return (
 		<ul
 			className={clsx(styles.messageList, {
 				[styles.slideInTop]: inAnimation,
-				[styles.error]: alert?.type === 'error',
-				[styles.success]: alert?.type === 'success',
+				[styles.error]: type === 'error',
+				[styles.success]: type === 'success',
 			})}
 		>
 			{messageList}
