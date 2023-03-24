@@ -5,9 +5,10 @@ header {
 	align-items: center;
 	border: 1px solid brown;
 	padding: 15px 25px;
+	margin-bottom: 25px;
 }
-
 .logo img {
+	display: block;
 	width: 130px;
   object-fit: contain;
 }
