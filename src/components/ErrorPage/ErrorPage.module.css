@@ -5,3 +5,13 @@
 .title {
   margin: 20px 0;
 }
+
+.message {
+  margin-bottom: 20px;
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
