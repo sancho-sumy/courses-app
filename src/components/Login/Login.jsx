@@ -1,4 +1,4 @@
-import { Link, Form, redirect, useActionData, json } from 'react-router-dom';
+import { Link, Form, redirect } from 'react-router-dom';
 import { Button, Input } from '../../common';
 
 import store from '../../store';
