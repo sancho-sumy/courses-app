@@ -1,48 +1,45 @@
 import { Link, Form, redirect, useActionData, json } from 'react-router-dom';
 import { Button, Input } from '../../common';
-import { Alert } from '../Alert';
+
+import store from '../../store';
+import { loginUserAction } from '../../store/user/actionCreators';
+import { authRequest } from '../../services';
 
 import { LOGIN_BTN_TEXT } from '../../constants';
 
 import styles from './Login.module.css';
 
-export async function action({ params, request }) {
+export async function action({ _params, request }) {
 	const data = await request.formData();
 	const user = {
 		password: data.get('password'),
 		email: data.get('email'),
 	};
 
-	const response = await fetch('http://localhost:4000/login', {
-		method: 'POST',
-		body: JSON.stringify(user),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	const resData = await response.json();
+	const loginResponse = await authRequest('login', user);
 
-	console.log(resData);
+	const resData = await loginResponse;
 
-	if (response.status === 400) {
-		return resData;
+	if (resData) {
+		store.dispatch(
+			loginUserAction({
+				name: resData.user.name,
+				email: resData.user.email,
+				token: resData.result,
+			})
+		);
+
+		localStorage.setItem('token', resData.result);
+
+		return redirect('/courses');
+	} else {
+		return null;
 	}
-
-	if (!response.ok) {
-		throw json({ message: "Could't login." }, { state: 500 });
-	}
-	localStorage.setItem('token', resData.result);
-	localStorage.setItem('user', JSON.stringify({ ...resData.user }));
-
-	return redirect('/courses');
 }
 
 function Login() {
-	const data = useActionData();
-
 	return (
 		<div className={styles.login}>
-			{data && <Alert messages={data?.errors} type='error' />}
 			<h2 className={styles.title}>Login</h2>
 			<Form className={styles.form} method='post'>
 				<Input

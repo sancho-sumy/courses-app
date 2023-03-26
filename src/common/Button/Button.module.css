@@ -1,11 +1,18 @@
 .btn {
   display: block;
-  width: 180px;
   height: 40px;
   border-color: blueviolet;
-  font-size: 1rem;
-  padding: 0 20px;
   cursor: pointer;
   transition: all 0.6s;
 }
 
+.standard {
+  width: 180px;
+  padding: 0 20px;
+  font-size: 1rem;
+}
+
+.small {
+  min-width: 40px;
+  font-size: 1.25rem;
+}

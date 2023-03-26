@@ -1,22 +1,22 @@
 import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+
 import { Button } from '../../common';
+
+import { getCourses, getAuthors } from '../../store/selectors';
+import { getAuthorsList, pipeDuration } from '../../helpers';
+import { BACK_TO_COURSES_BTN_TEXT } from '../../constants';
 
 import styles from './CourseInfo.module.css';
 
-import {
-	mockedAuthorsList,
-	mockedCoursesList,
-	BACK_TO_COURSES_BTN_TEXT,
-} from '../../constants';
-import getAuthors from '../../helpers/getAuthorsList';
-import pipeDuration from '../../helpers/pipeDuration';
-
 function CourseInfo() {
-	let { courseId } = useParams();
+	const { courseId } = useParams();
+	const courses = useSelector(getCourses);
+	const authorsList = useSelector(getAuthors);
 
-	const course = mockedCoursesList.find((coourse) => coourse.id === courseId);
-	const authors = getAuthors(course.authors, mockedAuthorsList)
+	const course = courses.find((coourse) => coourse.id === courseId);
+	const authors = getAuthorsList(course.authors, authorsList)
 		.split(',')
 		.map((author) => {
 			return <li key={uuidv4()}>{author}</li>;

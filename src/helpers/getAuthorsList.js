@@ -1,4 +1,4 @@
-export default function getAuthors(authorIds, authorList) {
+export default function getAuthorsList(authorIds, authorList) {
 	return authorIds
 		.map(
 			(authorId) =>
