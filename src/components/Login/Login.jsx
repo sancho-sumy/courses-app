@@ -18,13 +18,14 @@ export async function action({ _params, request }) {
 
 	const loginResponse = await authRequest('login', user);
 
-	const resData = await loginResponse;
+	const resData = loginResponse;
 
 	if (resData) {
 		store.dispatch(
 			loginUserAction({
 				name: resData.user.name,
 				email: resData.user.email,
+				role: resData.user.role,
 				token: resData.result,
 			})
 		);
