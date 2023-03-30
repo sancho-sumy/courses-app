@@ -4,9 +4,9 @@ import store from './store';
 import { backendURL } from './constants';
 import { setAlertAction } from './store/alert/actionCreators';
 
-export const authRequest = async (route, userData, method) => {
+export const authRequest = async (route, userData) => {
 	const response = await fetch(`${backendURL}/${route}`, {
-		method: method || 'POST',
+		method: 'POST',
 		body: JSON.stringify(userData),
 		headers: {
 			'Content-Type': 'application/json',
@@ -38,8 +38,24 @@ export const authRequest = async (route, userData, method) => {
 	return resData;
 };
 
-export const getAllCoursesRequest = async () => {
-	const response = await fetch(`${backendURL}/courses/all`, {
+export const logoutRequest = async (token) => {
+	const response = await fetch(`${backendURL}/logout`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: token,
+		},
+	});
+
+	if (!response.ok) {
+		throw json(
+			{ message: 'Logout problem! Try again later.' },
+			{ status: 500 }
+		);
+	}
+};
+
+export const getAllItemsRequest = async (route) => {
+	const response = await fetch(`${backendURL}/${route}/all`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -49,33 +65,72 @@ export const getAllCoursesRequest = async () => {
 	if (response.ok) {
 		return resData.result;
 	} else {
-		throw json({ message: 'Cannot load courses list.' }, { status: 500 });
+		throw json({ message: `Cannot load ${route} list.` }, { status: 500 });
 	}
 };
 
-export const getAllAuthorsRequest = async () => {
-	const response = await fetch(`${backendURL}/authors/all`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
-	const resData = await response.json();
-	if (response.ok) {
-		return resData.result;
-	} else {
-		throw json({ message: 'Cannot load authors list.' }, { status: 500 });
-	}
-};
-
-export const checkTokenRequest = async (token) => {
+export const checkUserRequest = async (token) => {
 	const response = await fetch(`${backendURL}/users/me`, {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json',
 			Authorization: token,
 		},
 	});
 	const resData = await response.json();
 	return resData;
+};
+
+export const addItemRequest = async ({ route, body, token }) => {
+	const response = await fetch(`${backendURL}/${route}/add`, {
+		method: 'POST',
+		body: JSON.stringify(body),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: token,
+		},
+	});
+
+	if (!response.ok) {
+		throw json({ message: 'Cannot add new item.' }, { status: 500 });
+	}
+
+	const data = await response.json();
+
+	return data;
+};
+
+export const updateItemByIdRequest = async ({ route, id, body, token }) => {
+	const response = await fetch(`${backendURL}/${route}/${id}`, {
+		method: 'PUT',
+		body: JSON.stringify(body),
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: token,
+		},
+	});
+
+	if (!response.ok) {
+		throw json({ message: 'Cannot update item.' }, { status: 500 });
+	}
+
+	const data = await response.json();
+
+	return data;
+};
+
+export const deleteItemByIdRequest = async ({ route, id, token }) => {
+	const response = await fetch(`${backendURL}/${route}/${id}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: token,
+		},
+	});
+
+	if (!response.ok) {
+		throw json({ message: 'Cannot delete item.' }, { status: 500 });
+	}
+
+	const data = await response.json();
+
+	return data;
 };
