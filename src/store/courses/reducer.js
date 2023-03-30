@@ -13,6 +13,10 @@ export const coursesReducer = (
 			return [...state, payload];
 		case coursesActionTypes.DELETE_COURSE:
 			return [...state.filter((course) => course.id !== payload)];
+		case coursesActionTypes.UPDATE_COURSE:
+			return [
+				...state.map((course) => (course.id !== payload.id ? course : payload)),
+			];
 		default:
 			return state;
 	}

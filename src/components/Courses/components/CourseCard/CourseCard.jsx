@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../../../common';
 
-import { deleteCourseAction } from '../../../../store/courses/actionCreators';
-import { setAlertAction } from '../../../../store/alert/actionCreators';
+import { getUser } from '../../../../store/selectors';
+import { deleteCourse } from '../../../../store/courses/thunk';
 import {
 	DELETE_BTN_ICON,
 	EDIT_BTN_ICON,
@@ -21,16 +21,11 @@ export function CourseCard({
 	duration,
 	creationDate,
 }) {
+	const { role } = useSelector(getUser);
 	const dispatch = useDispatch();
 
-	const deleteCourseHandler = (courseId) => {
-		dispatch(deleteCourseAction(courseId));
-		dispatch(
-			setAlertAction({
-				messages: [`Course deleted successfully.`],
-				type: 'success',
-			})
-		);
+	const deleteCourseHandler = async (courseId) => {
+		dispatch(deleteCourse(courseId));
 	};
 
 	return (
@@ -53,12 +48,18 @@ export function CourseCard({
 					<Link to={id}>
 						<Button buttonText={SHOW_COURSE_BTN_TEXT} />
 					</Link>
-					<Button buttonText={EDIT_BTN_ICON} size='small' />
-					<Button
-						buttonText={DELETE_BTN_ICON}
-						onClick={deleteCourseHandler.bind(this, id)}
-						size='small'
-					/>
+					{role === 'admin' && (
+						<>
+							<Link to={`update/${id}`}>
+								<Button buttonText={EDIT_BTN_ICON} size='small' />
+							</Link>
+							<Button
+								buttonText={DELETE_BTN_ICON}
+								onClick={deleteCourseHandler.bind(this, id)}
+								size='small'
+							/>
+						</>
+					)}
 				</div>
 			</div>
 		</div>
