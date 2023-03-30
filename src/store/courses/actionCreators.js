@@ -21,9 +21,9 @@ export const deleteCourseAction = (courseId) => {
 	};
 };
 
-export const updateCourseAction = (courseId) => {
+export const updateCourseAction = (course) => {
 	return {
 		type: coursesActionTypes.UPDATE_COURSE,
-		payload: courseId,
+		payload: course,
 	};
 };
