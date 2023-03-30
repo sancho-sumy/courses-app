@@ -4,25 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../common';
 import { Logo } from './components';
 
-import { getUserName } from '../../store/selectors';
-import { logoutUserAction } from '../../store/user/actionCreators';
+import { logoutUser } from '../../store/user/thunk';
+import { getUser } from '../../store/selectors';
 import { LOGOUT_BTN_TEXT } from '../../constants';
 
 import styles from './Header.module.css';
 
 function Header() {
-	const userName = useSelector(getUserName);
+	const { name } = useSelector(getUser);
+
 	const dispatch = useDispatch();
-
 	const navigation = useNavigate();
+	const location = useLocation();
 
-	const logoutHandler = () => {
-		localStorage.removeItem('token');
-		dispatch(logoutUserAction());
-		navigation('/login');
+	const logoutHandler = async () => {
+		const response = await dispatch(logoutUser());
+		if (response) {
+			localStorage.removeItem('token');
+			navigation('/login');
+		}
 	};
 
-	let location = useLocation();
 	return (
 		<header>
 			<div className={styles.logo}>
@@ -31,7 +33,7 @@ function Header() {
 			{location.pathname !== '/login' &&
 				location.pathname !== '/registration' && (
 					<>
-						<div className={styles.userName}>{userName}</div>
+						<div className={styles.userName}>{name}</div>
 						<div className={styles.controls}>
 							<Button buttonText={LOGOUT_BTN_TEXT} onClick={logoutHandler} />
 						</div>
