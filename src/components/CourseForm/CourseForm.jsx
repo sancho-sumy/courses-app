@@ -1,43 +1,48 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Button, Input, Textarea } from '../../common';
 import { AuthorsList } from './components';
 
-import { getAuthors } from '../../store/selectors';
+import { addNewCourse, updateCourse } from '../../store/courses/thunk';
+import { addNewAuthor } from '../../store/authors/thunk';
+import { getAuthors, getCourses } from '../../store/selectors';
+import { setAlertAction } from '../../store/alert/actionCreators';
 import { useDebounce } from '../../hooks';
 import { pipeDuration } from '../../helpers';
 import { courseSchema } from '../../schemas';
-import { addNewAuthorAction } from '../../store/authors/actionCreators';
-import { addNewCourseAction } from '../../store/courses/actionCreators';
-import { setAlertAction } from '../../store/alert/actionCreators';
 import {
 	CREATE_COURSE_BTN_TEXT,
 	CREATE_AUTHOR_BTN_TEXT,
 	ADD_AUTHOR_BTN_TEXT,
 	DELETE_AUTHOR_BTN_TEXT,
+	UPDATE_COURSE_BTN_TEXT,
 } from '../../constants';
 
-import styles from './CreateCourse.module.css';
+import styles from './CourseForm.module.css';
 
-function CreateCourse() {
-	const [course, setCourse] = useState({
-		id: '',
+function CourseForm() {
+	const { courseId } = useParams();
+
+	const courses = useSelector(getCourses);
+	const authors = useSelector(getAuthors);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const courseInitial = courses.find((coourse) => coourse.id === courseId) || {
 		title: '',
 		description: '',
-		creationDate: '',
 		duration: 0,
 		authors: [],
+	};
+
+	const [course, setCourse] = useState({
+		...courseInitial,
 	});
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [duration, setDuration] = useState('00:00');
-
-	const authors = useSelector(getAuthors);
-	const dispatch = useDispatch();
-
-	const navigate = useNavigate();
 
 	const debouncedDurationCalculation = useDebounce(course.duration, 1000);
 
@@ -60,7 +65,15 @@ function CreateCourse() {
 		setCourse({ ...course, authors: [...newCourseAuthors] });
 	};
 
-	const newAuthorSubmitHandler = (e) => {
+	const inputChangeHandler = (e) => {
+		const value = e.target.value;
+		setCourse({
+			...course,
+			[e.target.name]: value,
+		});
+	};
+
+	const newAuthorSubmitHandler = async (e) => {
 		e.preventDefault();
 		if (newAuthorName.length < 2) {
 			dispatch(
@@ -82,28 +95,17 @@ function CreateCourse() {
 			return;
 		}
 		const newAuthor = {
-			id: uuidv4(),
 			name: newAuthorName,
 		};
-		dispatch(addNewAuthorAction(newAuthor));
-		dispatch(
-			setAlertAction({
-				messages: [`${newAuthorName} added to authors list.`],
-				type: 'success',
-			})
-		);
-		setNewAuthorName('');
+
+		const response = await dispatch(addNewAuthor(newAuthor));
+
+		if (response) {
+			setNewAuthorName('');
+		}
 	};
 
-	const inputChangeHandler = (e) => {
-		const value = e.target.value;
-		setCourse({
-			...course,
-			[e.target.name]: value,
-		});
-	};
-
-	const newCourseSubmitHandler = async (e) => {
+	const courseSubmitHandler = async (action) => {
 		if (
 			!course.title ||
 			!course.description ||
@@ -111,15 +113,16 @@ function CreateCourse() {
 			course.authors.lenght < 1
 		) {
 			alert('Please, fill all fields');
-			return;
+			return false;
 		}
 
-		const newCourse = await courseSchema
+		const validatedCourse = await courseSchema
 			.validate(
 				{
-					...course,
-					id: uuidv4(),
-					creationDate: new Date().toLocaleDateString('en-GB'),
+					title: course.title,
+					description: course.description,
+					duration: course.duration,
+					authors: course.authors,
 				},
 				{ abortEarly: false }
 			)
@@ -128,15 +131,15 @@ function CreateCourse() {
 				dispatch(setAlertAction({ messages: [...messages], type: 'error' }));
 			});
 
-		if (newCourse) {
-			dispatch(addNewCourseAction(newCourse));
-			dispatch(
-				setAlertAction({
-					messages: ['New course successfully added!'],
-					type: 'success',
-				})
-			);
-			navigate('/courses');
+		if (validatedCourse) {
+			const response =
+				action === 'add'
+					? await dispatch(addNewCourse(validatedCourse))
+					: await dispatch(updateCourse(validatedCourse, courseId));
+
+			if (response) {
+				navigate('/courses');
+			}
 		}
 	};
 
@@ -176,10 +179,18 @@ function CreateCourse() {
 				value={course.title}
 				parameters={'required'}
 			/>
-			<Button
-				buttonText={CREATE_COURSE_BTN_TEXT}
-				onClick={newCourseSubmitHandler}
-			/>
+			{location.pathname === '/courses/add' && (
+				<Button
+					buttonText={CREATE_COURSE_BTN_TEXT}
+					onClick={courseSubmitHandler.bind(this, 'add')}
+				/>
+			)}
+			{location.pathname === `/courses/update/${courseId}` && (
+				<Button
+					buttonText={UPDATE_COURSE_BTN_TEXT}
+					onClick={courseSubmitHandler.bind(this, 'update')}
+				/>
+			)}
 			<div className={styles.row2}>
 				<Textarea
 					id='description'
@@ -237,4 +248,4 @@ function CreateCourse() {
 		</div>
 	);
 }
-export default CreateCourse;
+export default CourseForm;
