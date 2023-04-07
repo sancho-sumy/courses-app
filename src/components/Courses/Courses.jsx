@@ -77,7 +77,9 @@ function Courses({ setAddCourse, setAlert }) {
 			<CourseCard
 				title={course.title}
 				description={course.description}
-				authors={getAuthors(course.authors, authors)}
+				authors={getAuthors(course.authors, authors)
+					.map((author) => (author ? author : 'N/A'))
+					.join(', ')}
 				duration={pipeDuration(course.duration) + ' hours'}
 				creationDate={course.creationDate}
 				key={course.id}
