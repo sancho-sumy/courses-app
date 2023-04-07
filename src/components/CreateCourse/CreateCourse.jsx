@@ -46,7 +46,6 @@ function CreateCourse({ setAddCourse, setAlert }) {
 			if (authorsUpdate) {
 				fetchAuthorsList();
 				setAuthorsUpdate(false);
-				console.log('Fetching authors...');
 			}
 		} catch (error) {
 			setAlert({
@@ -107,7 +106,7 @@ function CreateCourse({ setAddCourse, setAlert }) {
 
 	const inputChangeHandler = (e) => {
 		const value = e.target.value;
-		console.log(value);
+
 		setCourse({
 			...course,
 			[e.target.name]: value,

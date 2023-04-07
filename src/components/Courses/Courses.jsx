@@ -35,7 +35,6 @@ function Courses({ setAddCourse, setAlert }) {
 			};
 			fetchCoursesList();
 			setSearch(false);
-			console.log('Fetching courses...');
 		} catch (error) {
 			setAlert({
 				messages: [`There is some problems with fetching courses.`],
@@ -52,7 +51,6 @@ function Courses({ setAddCourse, setAlert }) {
 				setAuthors(fetchedAuthors);
 			};
 			fetchAuthorsList();
-			console.log('Fetching authors...');
 		} catch (error) {
 			setAlert({
 				messages: [`There is some problems with fetching authors.`],
