@@ -21,7 +21,7 @@ export async function loader({ request }) {
 		return;
 	}
 
-	const url = new URL(request.url);
+  const url = new URL(request.url);
 	const searchPhrase = url.searchParams.get('q');
 
 	const coursesResponse = await [...mockedCoursesList]; //! to be replaced with real request at the next step
