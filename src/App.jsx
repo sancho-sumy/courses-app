@@ -17,7 +17,7 @@ import {
 	ErrorPage,
 } from './components';
 
-import { checkAuthToken } from './utils/auth';
+import { checkAuthToken, getAuthToken } from './utils/auth';
 
 import './App.css';
 
@@ -40,11 +40,13 @@ const router = createBrowserRouter([
 			{
 				path: 'registration',
 				element: <Registration />,
+				loader: () => (getAuthToken() ? redirect('/courses') : null),
 				action: registrationAction,
 			},
 			{
 				path: 'login',
 				element: <Login />,
+				loader: () => (getAuthToken() ? redirect('/courses') : null),
 				action: loginAction,
 			},
 		],
