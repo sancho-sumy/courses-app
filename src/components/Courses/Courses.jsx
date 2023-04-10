@@ -22,7 +22,7 @@ export async function loader({ request }) {
 		return redirect('/login');
 	}
 
-  const url = new URL(request.url);
+	const url = new URL(request.url);
 	const searchPhrase = url.searchParams.get('q');
 
 	const coursesResponse = await getAllCoursesRequest();

@@ -17,7 +17,7 @@ import {
 	ErrorPage,
 } from './components';
 
-import { checkAuthToken, getAuthToken } from './utils/auth';
+import { checkTokenValidity, getAuthToken } from './utils/auth';
 
 import './App.css';
 
