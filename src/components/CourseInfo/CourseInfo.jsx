@@ -16,11 +16,11 @@ function CourseInfo() {
 	const authorsList = useSelector(getAuthors);
 
 	const course = courses.find((coourse) => coourse.id === courseId);
-	const authors = getAuthorsList(course.authors, authorsList)
-		.split(',')
-		.map((author) => {
+	const authors = getAuthorsList(course.authors, authorsList).map(
+  (author) => {
 			return <li key={uuidv4()}>{author}</li>;
-		});
+		}
+	);
 
 	return (
 		<div className={styles.courseInfo}>

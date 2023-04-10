@@ -20,6 +20,7 @@ export async function action({ params, request }) {
 		return redirect('/login');
 	} else {
 		return null;
+
 	}
 }
 

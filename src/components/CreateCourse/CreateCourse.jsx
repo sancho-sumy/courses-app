@@ -126,6 +126,7 @@ function CreateCourse() {
 			.catch((err) => {
 				const messages = err.inner.map((error) => error.message);
 				dispatch(setAlertAction({ messages: [...messages], type: 'error' }));
+
 			});
 
 		if (newCourse) {

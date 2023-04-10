@@ -22,7 +22,7 @@ export async function loader({ request }) {
 		return redirect('/login');
 	}
 
-	const url = new URL(request.url);
+  const url = new URL(request.url);
 	const searchPhrase = url.searchParams.get('q');
 
 	const coursesResponse = await getAllCoursesRequest();
@@ -58,7 +58,9 @@ function Courses() {
 				id={course.id}
 				title={course.title}
 				description={course.description}
-				authors={getAuthorsList(course.authors, authors)}
+				authors={getAuthorsList(course.authors, authors)
+					.map((author) => (author ? author : 'N/A'))
+					.join(', ')}
 				duration={pipeDuration(course.duration) + ' hours'}
 				creationDate={course.creationDate}
 				key={course.id}
