@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Button } from '../../../../common';
 
 import styles from './CourseCard.module.css';
@@ -5,6 +6,7 @@ import styles from './CourseCard.module.css';
 import { SHOW_COURSE_BTN_TEXT } from '../../../../constants';
 
 export function CourseCard({
+	id,
 	title,
 	description,
 	authors,
@@ -28,7 +30,9 @@ export function CourseCard({
 					<span>Created:</span> {creationDate}
 				</p>
 				<div className={styles.controls}>
-					<Button buttonText={SHOW_COURSE_BTN_TEXT} />
+					<Link to={id}>
+						<Button buttonText={SHOW_COURSE_BTN_TEXT} />
+					</Link>
 				</div>
 			</div>
 		</div>

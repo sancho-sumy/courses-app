@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
+import { Link, useLoaderData, useSubmit } from 'react-router-dom';
 
 import { CourseCard, SearchBar } from './components';
 import { Button } from '../../common/';
-
-import styles from './Courses.module.css';
 
 import { getAuthors, pipeDuration } from '../../helpers';
 
@@ -13,66 +11,45 @@ import {
 	mockedAuthorsList,
 } from '../../constants';
 
-function Courses({ setAddCourse, setAlert }) {
-	const [courses, setCourses] = useState([]);
-	const [authors, setAuthors] = useState([]);
-	const [search, setSearch] = useState(false);
-	const [searchPhrase, setSearchPhrase] = useState('');
+import styles from './Courses.module.css';
+import { getAuthToken } from '../../utils/auth';
 
-	useEffect(() => {
-		try {
-			if (searchPhrase && !search) {
-				setSearch(false);
-				return;
-			}
-			const fetchCoursesList = async () => {
-				const response = await [...mockedCoursesList]; //! to be replaced with real request at the next step
-				const fetchedCourses = response.filter((course) => {
-					const regex = new RegExp(searchPhrase || '.', 'gi');
-					return regex.test(course.title) || regex.test(course.id);
-				});
-				setCourses(fetchedCourses);
-			};
-			fetchCoursesList();
-			setSearch(false);
-		} catch (error) {
-			setAlert({
-				messages: [`There is some problems with fetching courses.`],
-				type: 'error',
-			});
-		}
-	}, [searchPhrase, search, setAlert]);
+export async function loader({ request }) {
+	const token = getAuthToken();
 
-	useEffect(() => {
-		try {
-			const fetchAuthorsList = async () => {
-				const response = await [...mockedAuthorsList]; //! to be replaced with real request at the next step
-				const fetchedAuthors = response;
-				setAuthors(fetchedAuthors);
-			};
-			fetchAuthorsList();
-		} catch (error) {
-			setAlert({
-				messages: [`There is some problems with fetching authors.`],
-				type: 'error',
-			});
-		}
-	}, [setAlert]);
+	if (!token) {
+		return;
+	}
 
-	const searchHandler = (e) => {
-		e.preventDefault(e);
-		if (searchPhrase) {
-			setSearch(true);
-		}
-	};
+  const url = new URL(request.url);
+	const searchPhrase = url.searchParams.get('q');
+
+	const coursesResponse = await [...mockedCoursesList]; //! to be replaced with real request at the next step
+	const courses = coursesResponse.filter((course) => {
+		const regex = new RegExp(searchPhrase || '.', 'i');
+		return regex.test(course.title) || regex.test(course.id);
+	});
+
+	const authorsResponse = await [...mockedAuthorsList]; //! to be replaced with real request at the next step
+	const authors = authorsResponse;
+
+	return { courses, authors };
+}
+
+function Courses() {
+	const { courses, authors } = useLoaderData();
+	const submit = useSubmit();
 
 	const serchInputHandler = (e) => {
-		setSearchPhrase(e.target.value);
+		if (!e.target.value) {
+			submit(e.currentTarget.form);
+		}
 	};
 
 	const coursesList = courses.map((course) => {
 		return (
 			<CourseCard
+				id={course.id}
 				title={course.title}
 				description={course.description}
 				authors={getAuthors(course.authors, authors)
@@ -88,11 +65,10 @@ function Courses({ setAddCourse, setAlert }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<SearchBar onSubmit={searchHandler} onChange={serchInputHandler} />
-				<Button
-					buttonText={ADD_NEW_COURSE_BTN_TEXT}
-					onClick={() => setAddCourse(true)}
-				/>
+				<SearchBar onChange={serchInputHandler} />
+				<Link to='add'>
+					<Button buttonText={ADD_NEW_COURSE_BTN_TEXT} />
+				</Link>
 			</div>
 			{coursesList.length < 1 ? (
 				<p className={styles.empty}>There is no any courses...</p>

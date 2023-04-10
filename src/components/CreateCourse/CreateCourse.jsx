@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useDebounce } from '../../hooks';
@@ -19,7 +20,7 @@ import {
 
 import styles from './CreateCourse.module.css';
 
-function CreateCourse({ setAddCourse, setAlert }) {
+function CreateCourse() {
 	const [course, setCourse] = useState({
 		id: '',
 		title: '',
@@ -36,6 +37,8 @@ function CreateCourse({ setAddCourse, setAlert }) {
 
 	const debouncedDurationCalculation = useDebounce(course.duration, 1000);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		try {
 			const fetchAuthorsList = async () => {
@@ -48,12 +51,12 @@ function CreateCourse({ setAddCourse, setAlert }) {
 				setAuthorsUpdate(false);
 			}
 		} catch (error) {
-			setAlert({
-				messages: [`There is some problems with fetching authors.`],
-				type: 'error',
-			});
+			// setAlert({
+			// 	messages: [`There is some problems with fetching authors.`],
+			// 	type: 'error',
+			// });
 		}
-	}, [authorsUpdate, setAlert]);
+	}, [authorsUpdate]);
 
 	useEffect(() => {
 		if (debouncedDurationCalculation) {
@@ -77,18 +80,18 @@ function CreateCourse({ setAddCourse, setAlert }) {
 	const newAuthorSubmitHandler = (e) => {
 		e.preventDefault();
 		if (newAuthorName.length < 2) {
-			setAlert({
-				messages: ['Author name should be at least 2 characters.'],
-				type: 'error',
-			});
+			// setAlert({
+			// 	messages: ['Author name should be at least 2 characters.'],
+			// 	type: 'error',
+			// });
 			return;
 		}
 		const existingAuthors = authors.map((author) => author.name);
 		if (existingAuthors.includes(newAuthorName)) {
-			setAlert({
-				messages: [`${newAuthorName} is already exists.`],
-				type: 'error',
-			});
+			// setAlert({
+			// 	messages: [`${newAuthorName} is already exists.`],
+			// 	type: 'error',
+			// });
 			return;
 		}
 		const newAuthor = {
@@ -97,16 +100,15 @@ function CreateCourse({ setAddCourse, setAlert }) {
 		};
 		mockedAuthorsList.push(newAuthor); //! to be replaced with real request at the next step
 		setAuthorsUpdate(true);
-		setAlert({
-			messages: [`${newAuthorName} added to authors list.`],
-			type: 'success',
-		});
+		// setAlert({
+		// 	messages: [`${newAuthorName} added to authors list.`],
+		// 	type: 'success',
+		// });
 		setNewAuthorName('');
 	};
 
 	const inputChangeHandler = (e) => {
 		const value = e.target.value;
-
 		setCourse({
 			...course,
 			[e.target.name]: value,
@@ -134,17 +136,17 @@ function CreateCourse({ setAddCourse, setAlert }) {
 				{ abortEarly: false }
 			)
 			.catch((err) => {
-				const messages = err.inner.map((error) => error.message);
-				setAlert({ messages: [...messages], type: 'error' });
+				// const messages = err.inner.map((error) => error.message);
+				// setAlert({ messages: [...messages], type: 'error' });
 			});
 
 		if (newCourse) {
 			mockedCoursesList.push(newCourse); //! to be replaced with real request at the next step
-			setAlert({
-				messages: ['New course successfully added!'],
-				type: 'success',
-			});
-			setAddCourse(false);
+			// setAlert({
+			// 	messages: ['New course successfully added!'],
+			// 	type: 'success',
+			// });
+			navigate('/courses');
 		}
 	};
 
