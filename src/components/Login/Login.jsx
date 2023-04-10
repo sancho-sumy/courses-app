@@ -22,8 +22,6 @@ export async function action({ params, request }) {
 	});
 	const resData = await response.json();
 
-	console.log(resData);
-
 	if (response.status === 400) {
 		return resData;
 	}

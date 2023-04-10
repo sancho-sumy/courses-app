@@ -22,10 +22,6 @@ export async function action({ params, request }) {
 		},
 	});
 
-	const result = await response;
-
-	console.log(result);
-
 	if (response.status === 400) {
 		return response;
 	}
@@ -39,7 +35,6 @@ export async function action({ params, request }) {
 
 function Registration() {
 	const data = useActionData();
-	console.log(data);
 	return (
 		<div className={styles.registration}>
 			{data && <Alert messages={data?.errors} type='error' />}

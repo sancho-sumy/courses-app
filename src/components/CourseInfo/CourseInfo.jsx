@@ -16,11 +16,11 @@ function CourseInfo() {
 	let { courseId } = useParams();
 
 	const course = mockedCoursesList.find((coourse) => coourse.id === courseId);
-	const authors = getAuthors(course.authors, mockedAuthorsList)
-		.split(',')
-		.map((author) => {
+	const authors = getAuthors(course.authors, mockedAuthorsList).map(
+		(author) => {
 			return <li key={uuidv4()}>{author}</li>;
-		});
+		}
+	);
 
 	return (
 		<div className={styles.courseInfo}>

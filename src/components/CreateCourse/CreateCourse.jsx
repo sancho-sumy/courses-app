@@ -49,7 +49,6 @@ function CreateCourse() {
 			if (authorsUpdate) {
 				fetchAuthorsList();
 				setAuthorsUpdate(false);
-				console.log('Fetching authors...');
 			}
 		} catch (error) {
 			// setAlert({
@@ -110,7 +109,6 @@ function CreateCourse() {
 
 	const inputChangeHandler = (e) => {
 		const value = e.target.value;
-		console.log(value);
 		setCourse({
 			...course,
 			[e.target.name]: value,
@@ -138,7 +136,7 @@ function CreateCourse() {
 				{ abortEarly: false }
 			)
 			.catch((err) => {
-				const messages = err.inner.map((error) => error.message);
+				// const messages = err.inner.map((error) => error.message);
 				// setAlert({ messages: [...messages], type: 'error' });
 			});
 
