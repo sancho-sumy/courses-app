@@ -1,0 +1,11 @@
+.btn {
+  display: block;
+  width: 180px;
+  height: 40px;
+  border-color: blueviolet;
+  font-size: 1rem;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: all 0.6s;
+}
+

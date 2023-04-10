@@ -1,0 +1,33 @@
+.course {
+	display: grid;
+	grid-template-columns: 4fr minmax(250px, 2fr);
+	gap: 150px;
+	padding: 20px;
+	border: 1px solid darkolivegreen;
+	margin-top: 25px;
+}
+
+.title {
+	margin-bottom: 20px;
+}
+
+.course p {
+	margin-bottom: 10px;
+}
+
+.course p span {
+	font-weight: 500;
+}
+
+.controls {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.info p {
+  white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
