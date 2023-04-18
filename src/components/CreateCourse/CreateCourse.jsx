@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-
-import { useDebounce } from '../../hooks';
-import { pipeDuration } from '../../helpers';
-import { courseSchema } from '../../schemas';
 
 import { Button, Input, Textarea } from '../../common';
 import { AuthorsList } from './components';
 
+import { getAuthors } from '../../store/selectors';
+import { useDebounce } from '../../hooks';
+import { pipeDuration } from '../../helpers';
+import { courseSchema } from '../../schemas';
+import { addNewAuthorAction } from '../../store/authors/actionCreators';
+import { addNewCourseAction } from '../../store/courses/actionCreators';
+import { setAlertAction } from '../../store/alert/actionCreators';
 import {
 	CREATE_COURSE_BTN_TEXT,
 	CREATE_AUTHOR_BTN_TEXT,
-	mockedAuthorsList,
 	ADD_AUTHOR_BTN_TEXT,
 	DELETE_AUTHOR_BTN_TEXT,
-	mockedCoursesList,
 } from '../../constants';
 
 import styles from './CreateCourse.module.css';
@@ -29,34 +31,15 @@ function CreateCourse() {
 		duration: 0,
 		authors: [],
 	});
-
-	const [authors, setAuthors] = useState([]);
-	const [authorsUpdate, setAuthorsUpdate] = useState(true);
 	const [newAuthorName, setNewAuthorName] = useState('');
 	const [duration, setDuration] = useState('00:00');
 
-	const debouncedDurationCalculation = useDebounce(course.duration, 1000);
+	const authors = useSelector(getAuthors);
+	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		try {
-			const fetchAuthorsList = async () => {
-				const response = await [...mockedAuthorsList]; //! to be replaced with real request at the next step
-				const fetchedAuthors = response;
-				setAuthors(fetchedAuthors);
-			};
-			if (authorsUpdate) {
-				fetchAuthorsList();
-				setAuthorsUpdate(false);
-			}
-		} catch (error) {
-			// setAlert({
-			// 	messages: [`There is some problems with fetching authors.`],
-			// 	type: 'error',
-			// });
-		}
-	}, [authorsUpdate]);
+	const debouncedDurationCalculation = useDebounce(course.duration, 1000);
 
 	useEffect(() => {
 		if (debouncedDurationCalculation) {
@@ -80,30 +63,35 @@ function CreateCourse() {
 	const newAuthorSubmitHandler = (e) => {
 		e.preventDefault();
 		if (newAuthorName.length < 2) {
-			// setAlert({
-			// 	messages: ['Author name should be at least 2 characters.'],
-			// 	type: 'error',
-			// });
+			dispatch(
+				setAlertAction({
+					messages: ['Author name should be at least 2 characters.'],
+					type: 'error',
+				})
+			);
 			return;
 		}
 		const existingAuthors = authors.map((author) => author.name);
 		if (existingAuthors.includes(newAuthorName)) {
-			// setAlert({
-			// 	messages: [`${newAuthorName} is already exists.`],
-			// 	type: 'error',
-			// });
+			dispatch(
+				setAlertAction({
+					messages: [`${newAuthorName} is already exists.`],
+					type: 'error',
+				})
+			);
 			return;
 		}
 		const newAuthor = {
 			id: uuidv4(),
 			name: newAuthorName,
 		};
-		mockedAuthorsList.push(newAuthor); //! to be replaced with real request at the next step
-		setAuthorsUpdate(true);
-		// setAlert({
-		// 	messages: [`${newAuthorName} added to authors list.`],
-		// 	type: 'success',
-		// });
+		dispatch(addNewAuthorAction(newAuthor));
+		dispatch(
+			setAlertAction({
+				messages: [`${newAuthorName} added to authors list.`],
+				type: 'success',
+			})
+		);
 		setNewAuthorName('');
 	};
 
@@ -136,16 +124,18 @@ function CreateCourse() {
 				{ abortEarly: false }
 			)
 			.catch((err) => {
-				// const messages = err.inner.map((error) => error.message);
-				// setAlert({ messages: [...messages], type: 'error' });
+				const messages = err.inner.map((error) => error.message);
+				dispatch(setAlertAction({ messages: [...messages], type: 'error' }));
 			});
 
 		if (newCourse) {
-			mockedCoursesList.push(newCourse); //! to be replaced with real request at the next step
-			// setAlert({
-			// 	messages: ['New course successfully added!'],
-			// 	type: 'success',
-			// });
+			dispatch(addNewCourseAction(newCourse));
+			dispatch(
+				setAlertAction({
+					messages: ['New course successfully added!'],
+					type: 'success',
+				})
+			);
 			navigate('/courses');
 		}
 	};
@@ -176,7 +166,7 @@ function CreateCourse() {
 	});
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.createCourse}>
 			<Input
 				id='title'
 				name='title'
@@ -214,7 +204,11 @@ function CreateCourse() {
 				</form>
 				<div className={styles.cell}>
 					<h3>Authors</h3>
-					<ul>{authorsList}</ul>
+					{authorsList.length < 1 ? (
+						<p className={styles.empty}>There is no any authors...</p>
+					) : (
+						<ul>{authorsList}</ul>
+					)}
 				</div>
 				<div className={styles.cell}>
 					<h3>Duration</h3>
@@ -233,7 +227,11 @@ function CreateCourse() {
 				</div>
 				<div className={styles.cell}>
 					<h3>Course authors</h3>
-					{courseAuthorsList}
+					{courseAuthorsList.length < 1 ? (
+						<p className={styles.empty}>Please add at least one author.</p>
+					) : (
+						<ul>{courseAuthorsList}</ul>
+					)}
 				</div>
 			</div>
 		</div>

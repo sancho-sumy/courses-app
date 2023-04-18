@@ -1,8 +1,8 @@
-import { Link, Form, json, redirect, useActionData } from 'react-router-dom';
+import { Link, Form, redirect } from 'react-router-dom';
 import { Button, Input } from '../../common';
 
+import { authRequest } from '../../services';
 import { REGISTRATION_BTN_TEXT } from '../../constants';
-import { Alert } from '../Alert';
 
 import styles from './Registration.module.css';
 
@@ -14,30 +14,18 @@ export async function action({ params, request }) {
 		email: data.get('email'),
 	};
 
-	const response = await fetch('http://localhost:4000/register', {
-		method: 'POST',
-		body: JSON.stringify(newUser),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+	const registrationResponse = await authRequest('register', newUser);
 
-	if (response.status === 400) {
-		return response;
+	if (registrationResponse) {
+		return redirect('/login');
+	} else {
+		return null;
 	}
-
-	if (!response.ok) {
-		throw json({ message: "Could't save user" }, { state: 500 });
-	}
-
-	return redirect('/login');
 }
 
 function Registration() {
-	const data = useActionData();
 	return (
 		<div className={styles.registration}>
-			{data && <Alert messages={data?.errors} type='error' />}
 			<h2 className={styles.title}>Registration</h2>
 			<Form className={styles.form} method='post'>
 				<Input
