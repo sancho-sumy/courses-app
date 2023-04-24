@@ -113,7 +113,7 @@ function CourseForm() {
 			course.authors.lenght < 1
 		) {
 			alert('Please, fill all fields');
-			return false;
+			return;
 		}
 
 		const validatedCourse = await courseSchema
