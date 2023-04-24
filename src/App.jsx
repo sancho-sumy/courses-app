@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import {
-	CreateCourse,
+	CourseForm,
 	Courses,
 	coursesLoader,
 	RootLayout,
@@ -15,6 +15,7 @@ import {
 	loginAction,
 	CourseInfo,
 	ErrorPage,
+	PrivateRouter,
 } from './components';
 
 import { checkTokenValidity, getAuthToken } from './utils/auth';
@@ -34,8 +35,23 @@ const router = createBrowserRouter([
 				loader: coursesLoader,
 				children: [
 					{ index: true, element: <Courses /> },
-					{ path: 'add', element: <CreateCourse /> },
 					{ path: ':courseId', element: <CourseInfo /> },
+					{
+						path: 'add',
+						element: <PrivateRouter />,
+						children: [{ index: true, element: <CourseForm /> }],
+					},
+					{
+						path: 'update',
+						element: <PrivateRouter />,
+
+						children: [
+							{
+								path: ':courseId',
+								element: <CourseForm />,
+							},
+						],
+					},
 				],
 			},
 			{

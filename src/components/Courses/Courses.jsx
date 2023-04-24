@@ -6,8 +6,8 @@ import { Button } from '../../common/';
 
 import store from '../../store';
 import { getAuthorsList, pipeDuration } from '../../helpers';
-import { getAllCoursesRequest, getAllAuthorsRequest } from '../../services';
-import { getCourses, getAuthors } from '../../store/selectors';
+import { getAllItemsRequest } from '../../services';
+import { getCourses, getAuthors, getUser } from '../../store/selectors';
 import { getAuthToken } from '../../utils/auth';
 import { setAuthorsAction } from '../../store/authors/actionCreators';
 import { setCoursesAction } from '../../store/courses/actionCreators';
@@ -25,13 +25,13 @@ export async function loader({ request }) {
 	const url = new URL(request.url);
 	const searchPhrase = url.searchParams.get('q');
 
-	const coursesResponse = await getAllCoursesRequest();
+	const coursesResponse = await getAllItemsRequest('courses');
 	const courses = coursesResponse.filter((course) => {
 		const regex = new RegExp(searchPhrase || '.', 'i');
 		return regex.test(course.title) || regex.test(course.id);
 	});
 
-	const authorsResponse = await getAllAuthorsRequest();
+	const authorsResponse = await getAllItemsRequest('authors');
 	const authors = authorsResponse;
 
 	store.dispatch(setCoursesAction(courses));
@@ -43,6 +43,7 @@ export async function loader({ request }) {
 function Courses() {
 	const courses = useSelector(getCourses);
 	const authors = useSelector(getAuthors);
+	const { role } = useSelector(getUser);
 
 	const submit = useSubmit();
 
@@ -72,9 +73,11 @@ function Courses() {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<SearchBar onChange={serchInputHandler} />
-				<Link to='add'>
-					<Button buttonText={ADD_NEW_COURSE_BTN_TEXT} />
-				</Link>
+				{role === 'admin' && (
+					<Link to='add'>
+						<Button buttonText={ADD_NEW_COURSE_BTN_TEXT} />
+					</Link>
+				)}
 			</div>
 			{coursesList.length < 1 ? (
 				<p className={styles.empty}>There is no any courses...</p>
