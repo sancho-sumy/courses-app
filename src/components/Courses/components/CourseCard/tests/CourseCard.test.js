@@ -5,36 +5,36 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { CourseCard } from '../CourseCard';
 
-describe('CourseCard', () => {
-	const mockedState = {
-		user: {
-			isAuth: true,
-			name: 'Test Name',
-			email: 'test@test.com',
-			role: 'admin',
-		},
-		courses: [],
-		authors: [],
-	};
+const mockedState = {
+	user: {
+		isAuth: true,
+		name: 'Test Name',
+		email: 'test@test.com',
+		role: 'admin',
+	},
+	courses: [],
+	authors: [],
+};
 
-	const mockedCourse = {
-		id: '1111',
-		title: 'Test Title',
-		description: `Test Description`,
-		creationDate: '01/01/2000',
-		duration: '00:15',
-		authors: 'Author1, Author2',
-	};
+const mockedCourse = {
+	id: '1111',
+	title: 'Test Title',
+	description: `Test Description`,
+	creationDate: '01/01/2000',
+	duration: '00:15',
+	authors: 'Author1, Author2',
+};
 
-	const mockedStore = {
-		getState: () => mockedState,
-		subscribe: jest.fn(),
-		dispatch: jest.fn(),
-	};
+const mockedStore = {
+	getState: () => mockedState,
+	subscribe: jest.fn(),
+	dispatch: jest.fn(),
+};
 
-	const getAuthorsList = jest.fn();
-	const pipeDuration = jest.fn();
+const getAuthorsList = jest.fn();
+const pipeDuration = jest.fn();
 
+describe('CourseCard component', () => {
 	beforeEach(() => {
 		getAuthorsList.mockReturnValue(mockedCourse.authors);
 		pipeDuration.mockReturnValueOnce(mockedCourse.duration);
@@ -55,27 +55,27 @@ describe('CourseCard', () => {
 		);
 	});
 
-	test('should display title', () => {
+	it('should display title', () => {
 		const title = screen.queryByText('Test Title');
 		expect(title).toBeInTheDocument();
 	});
 
-	test('should display description', () => {
+	it('should display description', () => {
 		const description = screen.queryByText('Test Description');
 		expect(description).toBeInTheDocument();
 	});
 
-	test('should display duration in the correct format', () => {
+	it('should display duration in the correct format', () => {
 		const duration = screen.queryByText(mockedCourse.duration + ' hours');
 		expect(duration).toBeInTheDocument();
 	});
 
-	test('should display authors list', () => {
+	it('should display authors list', () => {
 		const authors = screen.queryByText(mockedCourse.authors);
 		expect(authors).toBeInTheDocument();
 	});
 
-	test('should display created date in the correct format', () => {
+	it('should display created date in the correct format', () => {
 		const creationDate = screen.queryByText(mockedCourse.creationDate);
 		expect(creationDate).toBeInTheDocument();
 	});

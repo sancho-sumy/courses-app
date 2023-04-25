@@ -94,13 +94,13 @@ describe('Courses component', () => {
 		useSelector.mockClear();
 	});
 
-	test('should display amount of CourseCard equal length of courses array', async () => {
+	it('should display amount of CourseCard equal length of courses array', async () => {
 		const coursesArrayLength = mockedState.courses.length;
 		const courseCards = await screen.findAllByText(SHOW_COURSE_BTN_TEXT);
 		expect(courseCards).toHaveLength(coursesArrayLength);
 	});
 
-	test('should display Empty container if courses array length is 0', async () => {
+	it('should display Empty container if courses array length is 0', async () => {
 		const localState = {
 			...mockedState,
 			courses: [],
@@ -122,7 +122,7 @@ describe('Courses component', () => {
 		expect(emptyContainer).toBeInTheDocument();
 	});
 
-	test('CourseForm should be showed after a click on a button "Add new course"', async () => {
+	it('CourseForm should be showed after a click on a button "Add new course"', async () => {
 		fireEvent.click(screen.getByText(ADD_NEW_COURSE_BTN_TEXT));
 
 		await waitFor(() => {

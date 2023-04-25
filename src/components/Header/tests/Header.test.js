@@ -21,17 +21,18 @@ const mockedStore = {
 	subscribe: jest.fn(),
 	dispatch: jest.fn(),
 };
+describe('Header component', () => {
+	it("should have logo and user's name", () => {
+		render(
+			<Provider store={mockedStore}>
+				<Header />
+			</Provider>,
+			{ wrapper: BrowserRouter }
+		);
+		const userName = screen.queryByText('Test Name');
+		const logo = screen.queryByAltText('App Logo');
 
-test("Header should have logo and user's name", () => {
-	render(
-		<Provider store={mockedStore}>
-			<Header />
-		</Provider>,
-		{ wrapper: BrowserRouter }
-	);
-	const userName = screen.queryByText('Test Name');
-	const logo = screen.queryByAltText('App Logo');
-
-	expect(userName).toBeInTheDocument();
-	expect(logo).toBeInTheDocument();
+		expect(userName).toBeInTheDocument();
+		expect(logo).toBeInTheDocument();
+	});
 });
