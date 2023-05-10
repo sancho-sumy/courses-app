@@ -1,54 +1,57 @@
 .messageList {
-  position: fixed;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  list-style: none;
-  text-align: center;
-  padding: 10px 50px;
-  animation: slideInTop 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	position: fixed;
+	top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+	width: 40%;
+	list-style: none;
+	text-align: center;
+	padding: 10px 50px;
+	animation: slideInTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	background: #ffffff;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 12px;
+  margin: 15px;
 }
 
 .slideInTop {
-  animation: slideInTop 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slideInTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .inAnimation {
-  top: 0;
-  opacity: 1;
-  transition: all 1.8s;
+	top: 0;
+	opacity: 1;
+	transition: all 1.8s;
 }
 
 .success {
-  color: darkgreen;
-  background-color: rgb(159, 224, 159);
+	color: darkgreen;
+	background-color: rgb(159, 224, 159);
 }
 
 .error {
 	color: red;
 	background-color: rgb(229, 189, 189);
-  transition: all 1s;
+	transition: all 1s;
 }
 
 @keyframes slideInTop {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    top: 0;
-    opacity: 1;
-  }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		top: 0;
+		opacity: 1;
+	}
 }
 
 @keyframes slideOutTop {
-  0% {
-    top: -0;
-    opacity: 1;
-  }
-  100% {
-    top: -100%;
-    opacity: 0;
-  }
+	0% {
+		top: -0;
+		opacity: 1;
+	}
+	100% {
+		top: -100%;
+		opacity: 0;
+	}
 }
-
-

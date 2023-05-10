@@ -51,12 +51,17 @@ export function CourseCard({
 					{role === 'admin' && (
 						<>
 							<Link to={`update/${id}`}>
-								<Button buttonText={EDIT_BTN_ICON} size='small' />
+								<Button
+									buttonText={EDIT_BTN_ICON}
+									size='small'
+									design='secondary'
+								/>
 							</Link>
 							<Button
 								buttonText={DELETE_BTN_ICON}
 								onClick={deleteCourseHandler.bind(this, id)}
 								size='small'
+								design='secondary'
 							/>
 						</>
 					)}

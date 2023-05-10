@@ -1,18 +1,55 @@
 .btn {
-  display: block;
-  height: 40px;
-  border-color: blueviolet;
-  cursor: pointer;
-  transition: all 0.6s;
+	display: block;
+	height: 40px;
+	cursor: pointer;
+	transition: all 0.6s;
+	border: none;
+	border-radius: 12px;
+	color: #ffffff;
+	font-weight: 500;
+}
+
+.primary {
+	background: var(--primary-main-color);
+}
+
+.btn.primary:hover {
+	background: var(--primary-second-color);
+}
+
+.btn.primary:active {
+	background: var(--primary-main-color);
+}
+
+.btn.primary:focus-visible,
+.btn.secondary:focus-visible {
+	border-style: double;
+	outline: none;
+}
+
+.secondary {
+	background: var(--secondary-main-color);
+}
+
+.btn.secondary:hover {
+	background: var(--secondary-second-color);
+}
+
+.btn.secondary:active {
+	background: var(--secondary-main-color);
+}
+
+.btn:disabled {
+	opacity: 0.25;
 }
 
 .standard {
-  width: 180px;
-  padding: 0 20px;
-  font-size: 1rem;
+	width: 200px;
+	padding: 0 20px;
+	font-size: 1rem;
 }
 
 .small {
-  min-width: 40px;
-  font-size: 1.25rem;
+	min-width: 40px;
+	font-size: 1.25rem;
 }

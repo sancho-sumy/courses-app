@@ -24,7 +24,7 @@ function CourseInfo() {
 		<div className={styles.courseInfo}>
 			<div className={styles.controls}>
 				<Link to='..' relative='path'>
-					<Button buttonText={BACK_TO_COURSES_BTN_TEXT} />
+					<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
 				</Link>
 			</div>
 			<h2 className={styles.title}>{course.title}</h2>

@@ -1,4 +1,5 @@
 .container {
   display: grid;
   grid-template-columns: minmax(200px, 600px) auto;
+  gap: 10px;
 }

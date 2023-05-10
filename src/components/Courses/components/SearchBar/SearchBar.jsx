@@ -13,7 +13,7 @@ export function SearchBar({ onSubmit, onChange }) {
 				id='search'
 				onChange={onChange}
 			/>
-			<Button buttonText={SEARCH_BTN_TEXT} type={'submit'} />
+			<Button buttonText={SEARCH_BTN_TEXT} type={'submit'} design='secondary' />
 		</Form>
 	);
 }

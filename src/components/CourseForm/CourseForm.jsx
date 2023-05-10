@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button, Input, Textarea } from '../../common';
@@ -18,6 +18,7 @@ import {
 	ADD_AUTHOR_BTN_TEXT,
 	DELETE_AUTHOR_BTN_TEXT,
 	UPDATE_COURSE_BTN_TEXT,
+	BACK_TO_COURSES_BTN_TEXT,
 } from '../../constants';
 
 import styles from './CourseForm.module.css';
@@ -170,6 +171,11 @@ function CourseForm() {
 
 	return (
 		<div className={styles.createCourse}>
+			<div className={styles.header}>
+				<Link to='/courses'>
+					<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
+				</Link>
+			</div>
 			<Input
 				id='title'
 				name='title'
