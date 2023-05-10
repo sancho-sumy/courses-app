@@ -16,5 +16,3 @@ export const BACK_TO_COURSES_BTN_TEXT = '< Back to courses';
 export const BACK_TO_MAIN_PAGE_BTN_TEXT = 'Main Page';
 export const DELETE_BTN_ICON = <span className='icon-bin'></span>;
 export const EDIT_BTN_ICON = <span className='icon-pencil'></span>;
-
-export const backendURL = 'http://localhost:4000';
