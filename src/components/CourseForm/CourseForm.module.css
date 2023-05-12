@@ -4,60 +4,59 @@
 	grid-template-rows: auto;
 	grid-auto-rows: auto;
 	gap: 20px;
-  width: 100%;
+	width: 100%;
 	padding: 25px;
 	background: #ffffff;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 16px;
 }
 
 .header {
-  width: 100%;
-  grid-column: span 2;
-  margin-bottom: 15px;
+	width: fit-content;
+	grid-column: span 2;
+	margin-bottom: 15px;
 }
 
 .createCourse button {
-  align-self: flex-end;
+	align-self: flex-end;
 }
 
 .empty {
-  text-align: center;
+	text-align: center;
 }
 
 .row2 {
-  min-height: 200px;
-  grid-column: span 2;
+	min-height: 200px;
+	grid-column: span 2;
 }
 
 .row3 {
-  height: 100%;
-  display: grid;
-  gap: 20px 50px;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: minmax(150px, auto);
-  grid-auto-rows: auto;
-  grid-column: span 2;
-  padding: 0 20px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+	height: 100%;
+	display: grid;
+	gap: 20px 50px;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: minmax(150px, auto);
+	grid-auto-rows: auto;
+	grid-column: span 2;
+	padding: 0 20px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
 }
 
 .row3 .cell {
-  min-height: 200px;
-  padding: 20px 0;
+	min-height: 200px;
+	padding: 20px 0;
 }
 
 .row3 h3 {
-  text-align: center;
-  margin-bottom: 15px;
+	text-align: center;
+	margin-bottom: 15px;
 }
 
 .row3 input {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .row3 button {
-  margin: 0 auto;
+	margin: 0 auto;
 }
-

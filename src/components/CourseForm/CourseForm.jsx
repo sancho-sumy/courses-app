@@ -172,9 +172,11 @@ const CourseForm = () => {
 	return (
 		<div className={styles.createCourse}>
 			<div className={styles.header}>
-				<Link to='/courses'>
-					<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
-				</Link>
+				<div>
+					<Link to='/courses'>
+						<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
+					</Link>
+				</div>
 			</div>
 			<Input
 				id='title'
