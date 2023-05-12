@@ -9,7 +9,7 @@ import { LOGIN_BTN_TEXT } from '../../constants';
 
 import styles from './Login.module.css';
 
-export async function action({ _params, request }) {
+export const action = async ({ _params, request }) => {
 	const data = await request.formData();
 	const user = {
 		password: data.get('password'),
@@ -36,9 +36,9 @@ export async function action({ _params, request }) {
 	} else {
 		return null;
 	}
-}
+};
 
-function Login() {
+const Login = () => {
 	return (
 		<div className={styles.login}>
 			<h2 className={styles.title}>Login</h2>
@@ -65,5 +65,5 @@ function Login() {
 			</p>
 		</div>
 	);
-}
+};
 export default Login;

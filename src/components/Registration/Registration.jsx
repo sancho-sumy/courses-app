@@ -6,7 +6,7 @@ import { REGISTRATION_BTN_TEXT } from '../../constants';
 
 import styles from './Registration.module.css';
 
-export async function action({ params, request }) {
+export const action = async ({ params, request }) => {
 	const data = await request.formData();
 	const newUser = {
 		name: data.get('name'),
@@ -21,9 +21,9 @@ export async function action({ params, request }) {
 	} else {
 		return null;
 	}
-}
+};
 
-function Registration() {
+const Registration = () => {
 	return (
 		<div className={styles.registration}>
 			<h2 className={styles.title}>Registration</h2>
@@ -55,5 +55,5 @@ function Registration() {
 			</p>
 		</div>
 	);
-}
+};
 export default Registration;

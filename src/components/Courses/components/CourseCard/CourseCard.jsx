@@ -13,14 +13,14 @@ import {
 
 import styles from './CourseCard.module.css';
 
-export function CourseCard({
+export const CourseCard = ({
 	id,
 	title,
 	description,
 	authors,
 	duration,
 	creationDate,
-}) {
+}) => {
 	const { role } = useSelector(getUser);
 	const dispatch = useDispatch();
 
@@ -69,4 +69,4 @@ export function CourseCard({
 			</div>
 		</div>
 	);
-}
+};

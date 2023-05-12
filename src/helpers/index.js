@@ -1,3 +1,3 @@
-export { default as dateGenerator } from './dateGeneratop';
-export { default as pipeDuration } from './pipeDuration';
-export { default as getAuthorsList } from './getAuthorsList';
+export { dateGenerator } from './dateGeneratop';
+export { pipeDuration } from './pipeDuration';
+export { getAuthorsList } from './getAuthorsList';

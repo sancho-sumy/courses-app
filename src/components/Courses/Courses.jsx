@@ -15,7 +15,7 @@ import { ADD_NEW_COURSE_BTN_TEXT } from '../../constants';
 
 import styles from './Courses.module.css';
 
-export async function loader({ request }) {
+export const loader = async ({ request }) => {
 	const token = getAuthToken();
 
 	if (!token) {
@@ -38,9 +38,9 @@ export async function loader({ request }) {
 	store.dispatch(setAuthorsAction(authors));
 
 	return { courses, authors };
-}
+};
 
-function Courses() {
+const Courses = () => {
 	const courses = useSelector(getCourses);
 	const authors = useSelector(getAuthors);
 	const { role } = useSelector(getUser);
@@ -86,6 +86,6 @@ function Courses() {
 			)}
 		</div>
 	);
-}
+};
 
 export default Courses;

@@ -6,7 +6,7 @@ import { Header } from '../Header';
 
 import styles from './ErrorPage.module.css';
 
-export function ErrorPage() {
+export const ErrorPage = () => {
 	const error = useRouteError();
 
 	let title = 'An error occured!';
@@ -32,4 +32,4 @@ export function ErrorPage() {
 			</div>
 		</div>
 	);
-}
+};

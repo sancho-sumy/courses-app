@@ -1,4 +1,4 @@
-export function Input({
+export const Input = ({
 	id,
 	name,
 	type,
@@ -6,7 +6,7 @@ export function Input({
 	placeholderText,
 	labelText,
 	onChange,
-}) {
+}) => {
 	return (
 		<div>
 			{labelText && <label htmlFor={id}>{labelText}</label>}
@@ -20,4 +20,4 @@ export function Input({
 			/>
 		</div>
 	);
-}
+};

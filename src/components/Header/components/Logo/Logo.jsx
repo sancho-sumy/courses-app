@@ -1,5 +1,5 @@
 import logo from '../../../../assets/images/logo.png';
 
-export function Logo() {
+export const Logo = () => {
 	return <img src={logo} alt='App Logo' />;
-}
+};

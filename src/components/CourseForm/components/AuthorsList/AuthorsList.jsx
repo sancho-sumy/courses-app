@@ -2,7 +2,7 @@ import { Button } from '../../../../common';
 
 import styles from './AuthorsList.module.css';
 
-function AuthorsList({ name, buttonText, onBtnClick }) {
+const AuthorsList = ({ name, buttonText, onBtnClick }) => {
 	return (
 		<li className={styles.listItem}>
 			<p className={styles.name}>{name}</p>
@@ -11,5 +11,5 @@ function AuthorsList({ name, buttonText, onBtnClick }) {
 			</div>
 		</li>
 	);
-}
+};
 export default AuthorsList;

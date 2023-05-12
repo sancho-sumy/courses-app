@@ -23,7 +23,7 @@ import {
 
 import styles from './CourseForm.module.css';
 
-function CourseForm() {
+const CourseForm = () => {
 	const { courseId } = useParams();
 
 	const courses = useSelector(getCourses);
@@ -253,5 +253,5 @@ function CourseForm() {
 			</div>
 		</div>
 	);
-}
+};
 export default CourseForm;

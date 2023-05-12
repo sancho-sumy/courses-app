@@ -1,13 +1,13 @@
 import styles from './Textarea.module.css';
 
-export function Textarea({
+export const Textarea = ({
 	id,
 	name,
 	value,
 	placeholderText,
 	labelText,
 	onChange,
-}) {
+}) => {
 	return (
 		<div className={styles.container}>
 			{labelText && <label htmlFor={id}>{labelText}</label>}
@@ -20,4 +20,4 @@ export function Textarea({
 			/>
 		</div>
 	);
-}
+};

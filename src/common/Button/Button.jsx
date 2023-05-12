@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import styles from './Button.module.css';
 
-export function Button({
+export const Button = ({
 	type = 'button',
 	buttonText,
 	onClick,
 	size = 'standard',
 	design = 'primary',
-}) {
+}) => {
 	return (
 		<button
 			className={clsx(styles.btn, {
@@ -22,4 +22,4 @@ export function Button({
 			{buttonText}
 		</button>
 	);
-}
+};

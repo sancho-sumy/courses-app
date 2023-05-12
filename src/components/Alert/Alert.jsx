@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import styles from './Alert.module.css';
 
-function Alert({ messages, type = 'success' }) {
+const Alert = ({ messages, type = 'success' }) => {
 	const [inAnimation, setInAnimation] = useState(false);
 
 	useLayoutEffect(() => {
@@ -25,5 +25,5 @@ function Alert({ messages, type = 'success' }) {
 			{messageList}
 		</ul>
 	);
-}
+};
 export default Alert;

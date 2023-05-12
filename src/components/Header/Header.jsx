@@ -10,7 +10,7 @@ import { LOGOUT_BTN_TEXT } from '../../constants';
 
 import styles from './Header.module.css';
 
-function Header() {
+const Header = () => {
 	const { name } = useSelector(getUser);
 
 	const dispatch = useDispatch();
@@ -41,5 +41,5 @@ function Header() {
 				)}
 		</header>
 	);
-}
+};
 export default Header;

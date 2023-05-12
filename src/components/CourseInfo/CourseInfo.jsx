@@ -10,7 +10,7 @@ import { BACK_TO_COURSES_BTN_TEXT } from '../../constants';
 
 import styles from './CourseInfo.module.css';
 
-function CourseInfo() {
+const CourseInfo = () => {
 	const { courseId } = useParams();
 	const courses = useSelector(getCourses);
 	const authorsList = useSelector(getAuthors);
@@ -50,5 +50,5 @@ function CourseInfo() {
 			</div>
 		</div>
 	);
-}
+};
 export default CourseInfo;
