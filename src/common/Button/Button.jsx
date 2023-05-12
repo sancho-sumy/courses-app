@@ -7,6 +7,7 @@ export const Button = ({
 	onClick,
 	size = 'standard',
 	design = 'primary',
+	isDisabled = false,
 }) => {
 	return (
 		<button
@@ -18,6 +19,7 @@ export const Button = ({
 			})}
 			type={type}
 			onClick={onClick}
+			disabled={isDisabled}
 		>
 			{buttonText}
 		</button>

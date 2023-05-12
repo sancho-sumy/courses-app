@@ -67,3 +67,60 @@ textarea:focus {
 textarea {
 	resize: vertical;
 }
+
+.btn-spinner-ellipsis {
+	display: flex;
+	position: relative;
+	width: 70px;
+	height: 40px;
+	margin: 0 auto;
+}
+.btn-spinner-ellipsis div {
+	position: absolute;
+	top: 16px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #fff;
+	animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.btn-spinner-ellipsis div:nth-child(1) {
+	left: 8px;
+	animation: btn-spinner-ellipsis1 0.6s infinite;
+}
+.btn-spinner-ellipsis div:nth-child(2) {
+	left: 8px;
+	animation: btn-spinner-ellipsis2 0.6s infinite;
+}
+.btn-spinner-ellipsis div:nth-child(3) {
+	left: 32px;
+	animation: btn-spinner-ellipsis2 0.6s infinite;
+}
+.btn-spinner-ellipsis div:nth-child(4) {
+	left: 56px;
+	animation: btn-spinner-ellipsis3 0.6s infinite;
+}
+@keyframes btn-spinner-ellipsis1 {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+@keyframes btn-spinner-ellipsis3 {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+@keyframes btn-spinner-ellipsis2 {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(24px, 0);
+	}
+}

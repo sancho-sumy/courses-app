@@ -1,8 +1,8 @@
-import { Link, Form, redirect } from 'react-router-dom';
+import { Link, Form, redirect, useNavigation } from 'react-router-dom';
 import { Button, Input } from '../../common';
 
 import { authRequest } from '../../services';
-import { REGISTRATION_BTN_TEXT } from '../../constants';
+import { REGISTRATION_BTN_TEXT, LOADING_BTN_SPINNER } from '../../constants';
 
 import styles from './Registration.module.css';
 
@@ -24,6 +24,8 @@ export const action = async ({ params, request }) => {
 };
 
 const Registration = () => {
+	const navigation = useNavigation();
+
 	return (
 		<div className={styles.registration}>
 			<h2 className={styles.title}>Registration</h2>
@@ -48,7 +50,15 @@ const Registration = () => {
 					name='password'
 					placeholderText='Enter password'
 				/>
-				<Button buttonText={REGISTRATION_BTN_TEXT} type={'submit'} />
+				<Button
+					buttonText={
+						navigation.state === 'idle'
+							? REGISTRATION_BTN_TEXT
+							: LOADING_BTN_SPINNER
+					}
+					type={'submit'}
+					isDisabled={navigation.state !== 'idle'}
+				/>
 			</Form>
 			<p className={styles.notice}>
 				If you have an account you can <Link to='/login'>Login</Link>

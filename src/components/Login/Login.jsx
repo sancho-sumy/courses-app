@@ -1,11 +1,11 @@
-import { Link, Form, redirect } from 'react-router-dom';
+import { Link, Form, redirect, useNavigation } from 'react-router-dom';
 import { Button, Input } from '../../common';
 
 import store from '../../store';
 import { loginUserAction } from '../../store/user/actionCreators';
 import { authRequest } from '../../services';
 
-import { LOGIN_BTN_TEXT } from '../../constants';
+import { LOADING_BTN_SPINNER, LOGIN_BTN_TEXT } from '../../constants';
 
 import styles from './Login.module.css';
 
@@ -39,6 +39,7 @@ export const action = async ({ _params, request }) => {
 };
 
 const Login = () => {
+	const navigation = useNavigation();
 	return (
 		<div className={styles.login}>
 			<h2 className={styles.title}>Login</h2>
@@ -57,7 +58,13 @@ const Login = () => {
 					name='password'
 					placeholderText='Enter password'
 				/>
-				<Button buttonText={LOGIN_BTN_TEXT} type={'submit'} />
+				<Button
+					buttonText={
+						navigation.state === 'idle' ? LOGIN_BTN_TEXT : LOADING_BTN_SPINNER
+					}
+					type={'submit'}
+					isDisabled={navigation.state !== 'idle'}
+				/>
 			</Form>
 			<p className={styles.notice}>
 				If you don't have an account, you can{' '}
