@@ -1,6 +1,6 @@
 import { coursesActionTypes } from './actionTypes';
 
-const coursesInitialState = [];
+const coursesInitialState = { courses: [] };
 
 export const coursesReducer = (
 	state = coursesInitialState,
@@ -8,15 +8,23 @@ export const coursesReducer = (
 ) => {
 	switch (type) {
 		case coursesActionTypes.SET_COURSES:
-			return [...payload];
+			return { ...state, courses: [...payload] };
 		case coursesActionTypes.SAVE_NEW_COURSE:
-			return [...state, payload];
+			return { ...state, courses: [...state.courses, payload] };
 		case coursesActionTypes.DELETE_COURSE:
-			return [...state.filter((course) => course.id !== payload)];
+			return {
+				...state,
+				courses: [...state.courses.filter((course) => course.id !== payload)],
+			};
 		case coursesActionTypes.UPDATE_COURSE:
-			return [
-				...state.map((course) => (course.id !== payload.id ? course : payload)),
-			];
+			return {
+				...state,
+				courses: [
+					...state.courses.map((course) =>
+						course.id !== payload.id ? course : payload
+					),
+				],
+			};
 		default:
 			return state;
 	}

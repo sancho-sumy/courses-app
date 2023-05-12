@@ -1,6 +1,6 @@
 import { authorsActionTypes } from './actionTypes';
 
-const authorsInitialState = [];
+const authorsInitialState = { authors: [] };
 
 export const authorsReducer = (
 	state = authorsInitialState,
@@ -8,9 +8,9 @@ export const authorsReducer = (
 ) => {
 	switch (type) {
 		case authorsActionTypes.SET_AUTHORS:
-			return [...payload];
+			return { ...state, authors: [...payload] };
 		case authorsActionTypes.SAVE_NEW_AUTHOR:
-			return [...state, payload];
+			return { ...state, authors: [...state.authors, payload] };
 		default:
 			return state;
 	}

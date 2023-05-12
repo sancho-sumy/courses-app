@@ -18,28 +18,32 @@ const mockedState = {
 		email: 'test@test.com',
 		role: 'admin',
 	},
-	courses: [
-		{
-			id: '1',
-			title: 'Course 1',
-			description: 'Description 1',
-			authors: ['author1', 'author2'],
-			duration: 90,
-			creationDate: '05/03/2022',
-		},
-		{
-			id: '2',
-			title: 'Course 2',
-			description: 'Description 2',
-			authors: ['author1'],
-			duration: 120,
-			creationDate: '15/12/2023',
-		},
-	],
-	authors: [
-		{ id: '1', name: 'Author 1' },
-		{ id: '2', name: 'Author 2' },
-	],
+	courses: {
+		courses: [
+			{
+				id: '1',
+				title: 'Course 1',
+				description: 'Description 1',
+				authors: ['author1', 'author2'],
+				duration: 90,
+				creationDate: '05/03/2022',
+			},
+			{
+				id: '2',
+				title: 'Course 2',
+				description: 'Description 2',
+				authors: ['author1'],
+				duration: 120,
+				creationDate: '15/12/2023',
+			},
+		],
+	},
+	authors: {
+		authors: [
+			{ id: '1', name: 'Author 1' },
+			{ id: '2', name: 'Author 2' },
+		],
+	},
 };
 
 const mockedStore = {
@@ -95,7 +99,7 @@ describe('Courses component', () => {
 	});
 
 	it('should display amount of CourseCard equal length of courses array', async () => {
-		const coursesArrayLength = mockedState.courses.length;
+		const coursesArrayLength = mockedState.courses.courses.length;
 		const courseCards = await screen.findAllByText(SHOW_COURSE_BTN_TEXT);
 		expect(courseCards).toHaveLength(coursesArrayLength);
 	});
@@ -103,7 +107,7 @@ describe('Courses component', () => {
 	it('should display Empty container if courses array length is 0', async () => {
 		const localState = {
 			...mockedState,
-			courses: [],
+			courses: { courses: [] },
 		};
 
 		useSelector.mockImplementation((callback) => {
