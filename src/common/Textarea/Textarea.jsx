@@ -3,8 +3,9 @@ import styles from './Textarea.module.css';
 export const Textarea = ({
 	id,
 	name,
-	value,
 	placeholderText,
+	defaultValue,
+	value,
 	labelText,
 	onChange,
 }) => {
@@ -14,9 +15,10 @@ export const Textarea = ({
 			<textarea
 				id={id}
 				name={name}
-				value={value}
 				placeholder={placeholderText}
 				onChange={onChange}
+				defaultValue={defaultValue}
+				value={value}
 			/>
 		</div>
 	);

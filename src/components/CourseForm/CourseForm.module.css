@@ -1,36 +1,53 @@
-.createCourse {
-	display: grid;
-	grid-template-columns: minmax(200px, 1fr) auto;
-	grid-template-rows: auto;
-	grid-auto-rows: auto;
-	gap: 20px;
+.courseForm {
 	width: 100%;
 	padding: 25px;
 	background: #ffffff;
 	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 16px;
+	margin-bottom: 25px;
+}
+
+.course {
+	width: 100%;
+	display: grid;
+	grid-template-columns: minmax(200px, 1fr) auto;
+	grid-template-rows: auto;
+	grid-auto-rows: auto;
+	gap: 20px;
+	padding: 20px;
+}
+
+.course button {
+	align-self: flex-end;
 }
 
 .header {
 	width: fit-content;
-	grid-column: span 2;
+	padding: 0 25px;
 	margin-bottom: 15px;
-}
-
-.createCourse button {
-	align-self: flex-end;
 }
 
 .empty {
 	text-align: center;
 }
 
-.row2 {
-	min-height: 200px;
+.description {
+	min-height: 300px;
 	grid-column: span 2;
 }
 
-.row3 {
+.duration span {
+	display: inline-block;
+	margin-top: 5px;
+	padding-left: 13px;
+	color: grey;
+}
+
+.duration {
+	width: 200px;
+}
+
+.authors {
 	height: 100%;
 	display: grid;
 	gap: 20px 50px;
@@ -38,25 +55,15 @@
 	grid-template-rows: minmax(150px, auto);
 	grid-auto-rows: auto;
 	grid-column: span 2;
-	padding: 0 20px;
+	padding: 20px;
 	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
 }
 
-.row3 .cell {
-	min-height: 200px;
-	padding: 20px 0;
-}
-
-.row3 h3 {
+.authors h3 {
 	text-align: center;
-	margin-bottom: 15px;
-}
-
-.row3 input {
 	margin-bottom: 20px;
 }
 
-.row3 button {
-	margin: 0 auto;
-}
+
+

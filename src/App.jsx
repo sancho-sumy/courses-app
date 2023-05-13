@@ -39,7 +39,12 @@ const router = createBrowserRouter([
 					{
 						path: 'add',
 						element: <PrivateRouter />,
-						children: [{ index: true, element: <CourseForm /> }],
+						children: [
+							{
+								index: true,
+								element: <CourseForm />,
+							},
+						],
 					},
 					{
 						path: 'update',

@@ -1,4 +1,7 @@
 export const pipeDuration = (totalMinutes) => {
+	if (totalMinutes < 0) {
+		return '00:00';
+	}
 	const minutes = totalMinutes % 60;
 	const hours = Math.floor(totalMinutes / 60);
 
