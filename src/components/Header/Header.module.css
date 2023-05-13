@@ -3,9 +3,7 @@ header {
 	grid-template-columns: minmax(100px, 1fr) 200px auto;
   gap: 10px;
 	align-items: center;
-	/* border: 1px solid brown; */
 	padding: 15px 25px;
-	margin-bottom: 25px;
 }
 .logo img {
 	display: block;
