@@ -18,11 +18,15 @@ html {
 }
 
 #root {
-	position: relative;
 	max-width: 1440px;
 	min-height: 100vh;
 	padding: 0;
 	margin: 0 auto;
+}
+
+#overlays{
+	display: flex;
+	justify-content: center;
 }
 
 a {
