@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 
 import styles from './Modal.module.css';
 import { Button } from '../Button';
+import { CLOSE_BTN_ICON } from '../../constants';
 
 const Backdrop = ({ onClose }) => {
 	return <div className={styles.backdrop} onClick={onClose}></div>;
@@ -12,7 +13,7 @@ const ModalOverlay = ({ children, onClose }) => {
 		<div className={styles.modal}>
 			<div className={styles.close}>
 				<Button
-					buttonText='X'
+					buttonText={CLOSE_BTN_ICON}
 					size='small'
 					design='secondary'
 					onClick={onClose}

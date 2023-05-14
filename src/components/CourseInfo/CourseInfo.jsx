@@ -21,34 +21,36 @@ const CourseInfo = () => {
 	});
 
 	return (
-		<div className={styles.courseInfo}>
-			<div className={styles.controls}>
+		<>
+			<div className={styles.header}>
 				<Link to='..' relative='path'>
 					<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
 				</Link>
 			</div>
-			<h2 className={styles.title}>{course.title}</h2>
-			<div className={styles.description}>
-				<p>{course.description}</p>
-			</div>
-			<div className={styles.info}>
-				<p>
-					<b>ID:</b> {courseId}
-				</p>
-				<p>
-					<b>Duration:</b> {pipeDuration(course.duration)} hours
-				</p>
-				<p>
-					<b>Created:</b> {course.creationDate}
-				</p>
-				<p>
-					<b>Authors:</b>
-				</p>
-				<div>
-					<ul>{authors}</ul>
+			<div className={styles.courseInfo}>
+				<h2 className={styles.title}>{course.title}</h2>
+				<div className={styles.description}>
+					<p>{course.description}</p>
+				</div>
+				<div className={styles.info}>
+					<p>
+						<b>ID:</b> {courseId}
+					</p>
+					<p>
+						<b>Duration:</b> {pipeDuration(course.duration)} hours
+					</p>
+					<p>
+						<b>Created:</b> {course.creationDate}
+					</p>
+					<p>
+						<b>Authors:</b>
+					</p>
+					<div>
+						<ul>{authors}</ul>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 export default CourseInfo;

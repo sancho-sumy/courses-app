@@ -3,10 +3,15 @@
 	grid-template-columns: 4fr minmax(250px, 2fr);
 	gap: 30px 50px;
 	padding: 20px 40px;
-	margin-top: 25px;
 	background: #ffffff;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 	border-radius: 16px;
+}
+
+.header {
+	width: fit-content;
+	padding: 0 25px;
+	margin-bottom: 15px;
 }
 
 .courseInfo .description {

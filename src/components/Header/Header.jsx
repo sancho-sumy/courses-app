@@ -6,7 +6,7 @@ import { Logo } from './components';
 
 import { logoutUser } from '../../store/user/thunk';
 import { getUser } from '../../store/selectors';
-import { LOGOUT_BTN_TEXT } from '../../constants';
+import { LOGOUT_BTN_ICON } from '../../constants';
 
 import styles from './Header.module.css';
 
@@ -34,8 +34,16 @@ const Header = () => {
 				location.pathname !== '/registration' && (
 					<>
 						<div className={styles.userName}>{name}</div>
+						<div className={styles.avatar}>
+							<span className='icon-user'></span>
+						</div>
 						<div className={styles.controls}>
-							<Button buttonText={LOGOUT_BTN_TEXT} onClick={logoutHandler} />
+							<Button
+								buttonText={LOGOUT_BTN_ICON}
+								onClick={logoutHandler}
+								size='small'
+								design='secondary'
+							/>
 						</div>
 					</>
 				)}

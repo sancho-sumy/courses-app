@@ -24,6 +24,7 @@ import {
 	UPDATE_COURSE_BTN_TEXT,
 	BACK_TO_COURSES_BTN_TEXT,
 	LOADING_BTN_SPINNER,
+	ADD_BTN_ICON,
 } from '../../constants';
 
 import styles from './CourseForm.module.css';
@@ -219,10 +220,10 @@ const CourseForm = () => {
 				<div className={styles.authors}>
 					<div className={styles.cell}>
 						<div className={styles.title}>
-							<span>Available authors</span>
-							<span>
+							<span className={styles.text}>Available authors</span>
+							<span className={styles.controls}>
 								<Button
-									buttonText='+'
+									buttonText={ADD_BTN_ICON}
 									size='small'
 									design='secondary'
 									onClick={() => dispatch(openModalAction())}
@@ -237,7 +238,7 @@ const CourseForm = () => {
 					</div>
 					<div className={styles.cell}>
 						<div className={styles.title}>
-							<span>Course authors</span>
+							<span className={styles.text}>Course authors</span>
 						</div>
 						{courseAuthorsList.length < 1 ? (
 							<p className={styles.empty}>Please, add at least one author.</p>

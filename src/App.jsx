@@ -20,8 +20,6 @@ import {
 
 import { checkTokenValidity, getAuthToken } from './utils/auth';
 
-import './App.css';
-
 const router = createBrowserRouter([
 	{
 		path: '/',

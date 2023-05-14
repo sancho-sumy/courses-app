@@ -5,6 +5,8 @@ import { deleteAlertAction } from '../../store/alert/actionCreators';
 import { v4 as uuidv4 } from 'uuid';
 import clsx from 'clsx';
 
+import { ALERT_TIMER_DURATION, CLOSE_BTN_ICON } from '../../constants';
+
 import styles from './Alert.module.css';
 
 const Alert = () => {
@@ -14,7 +16,7 @@ const Alert = () => {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			dispatch(deleteAlertAction());
-		}, 8000);
+		}, ALERT_TIMER_DURATION);
 		return () => {
 			clearTimeout(timer);
 		};
@@ -38,7 +40,7 @@ const Alert = () => {
 					dispatch(deleteAlertAction());
 				}}
 			>
-				X
+				{CLOSE_BTN_ICON}
 			</div>
 		</div>
 	);

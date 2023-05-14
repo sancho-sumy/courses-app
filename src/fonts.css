@@ -28,6 +28,66 @@
 .icon-pencil:before {
   content: "\e905";
 }
+.icon-save:before {
+  content: "\e962";
+}
+.icon-user:before {
+  content: "\e971";
+}
 .icon-bin:before {
   content: "\e9ac";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-info:before {
+  content: "\ea0c";
+}
+.icon-cancel-circle:before {
+  content: "\ea0d";
+}
+.icon-blocked:before {
+  content: "\ea0e";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
+.icon-loop:before {
+  content: "\ea2e";
+}
+.icon-arrow-up:before {
+  content: "\ea3a";
+}
+.icon-arrow-right:before {
+  content: "\ea3c";
+}
+.icon-arrow-down:before {
+  content: "\ea3e";
+}
+.icon-arrow-left:before {
+  content: "\ea40";
+}
+.icon-circle-up:before {
+  content: "\ea41";
+}
+.icon-circle-right:before {
+  content: "\ea42";
+}
+.icon-circle-down:before {
+  content: "\ea43";
+}
+.icon-circle-left:before {
+  content: "\ea44";
+}
+.icon-logout:before {
+  content: "\e900";
+}
+.icon-login:before {
+  content: "\e901";
 }
