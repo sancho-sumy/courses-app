@@ -65,5 +65,40 @@
 	margin-bottom: 20px;
 }
 
+.authors .title {
+	display: flex;
+	height: 40px;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	margin-bottom: 20px;
+}
 
+.authors .title span {
+	display: inline-block;
+	width: fit-content;
+	font-size: 1.17em;
+	font-weight: bold;
+}
 
+.enter {
+	opacity: 0;
+	transform: scale(1.1);
+}
+
+.enterActive {
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+
+.exit {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.exitActive {
+	opacity: 0;
+	transform: scale(0.9);
+	transition: opacity 400ms ease-out, transform 400ms ease-out;
+}

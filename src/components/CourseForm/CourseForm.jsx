@@ -1,13 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import CSSTransition from 'react-transition-group/CSSTransition';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
-import { Button, Input, Textarea } from '../../common';
+import { Button, Input, Modal, Textarea } from '../../common';
 import { AddNewAuthor, AuthorsList } from './components';
 
 import { addNewCourse, updateCourse } from '../../store/courses/thunk';
-import { getAuthors, getCourses } from '../../store/selectors';
+import { getAuthors, getCourses, getModal } from '../../store/selectors';
 import { setAlertAction } from '../../store/alert/actionCreators';
+import {
+	closeModalAction,
+	openModalAction,
+} from '../../store/modal/actionCreators';
 import { useDebounce } from '../../hooks';
 import { pipeDuration } from '../../helpers';
 import { courseSchema } from '../../schemas';
@@ -27,6 +33,7 @@ const CourseForm = () => {
 
 	const courses = useSelector(getCourses);
 	const authors = useSelector(getAuthors);
+	const modal = useSelector(getModal);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -119,12 +126,17 @@ const CourseForm = () => {
 			.filter((author) => !courseAuthors.includes(author.id))
 			.map((author) => {
 				return (
-					<AuthorsList
+					<CSSTransition
 						key={author.id}
-						name={author.name}
-						buttonText={ADD_AUTHOR_BTN_TEXT}
-						onBtnClick={addCourseAuthorHandler.bind(this, author.id)}
-					/>
+						classNames={{ ...styles }}
+						timeout={400}
+					>
+						<AuthorsList
+							name={author.name}
+							buttonText={ADD_AUTHOR_BTN_TEXT}
+							onBtnClick={addCourseAuthorHandler.bind(this, author.id)}
+						/>
+					</CSSTransition>
 				);
 			});
 	}, [addCourseAuthorHandler, authors, courseAuthors]);
@@ -132,13 +144,14 @@ const CourseForm = () => {
 	const courseAuthorsList = useMemo(() => {
 		return courseAuthors.map((authorId) => {
 			return (
-				<AuthorsList
-					key={authorId}
-					id={authorId}
-					name={authors.find((author) => author.id === authorId)?.name}
-					buttonText={DELETE_AUTHOR_BTN_TEXT}
-					onBtnClick={deleteCourseAuthorHandler.bind(this, authorId)}
-				/>
+				<CSSTransition key={authorId} classNames={{ ...styles }} timeout={400}>
+					<AuthorsList
+						id={authorId}
+						name={authors.find((author) => author.id === authorId)?.name}
+						buttonText={DELETE_AUTHOR_BTN_TEXT}
+						onBtnClick={deleteCourseAuthorHandler.bind(this, authorId)}
+					/>
+				</CSSTransition>
 			);
 		});
 	}, [authors, courseAuthors, deleteCourseAuthorHandler]);
@@ -205,24 +218,42 @@ const CourseForm = () => {
 				</form>
 				<div className={styles.authors}>
 					<div className={styles.cell}>
-						<h3>Available authors</h3>
+						<div className={styles.title}>
+							<span>Available authors</span>
+							<span>
+								<Button
+									buttonText='+'
+									size='small'
+									design='secondary'
+									onClick={() => dispatch(openModalAction())}
+								></Button>
+							</span>
+						</div>
 						{authorsList.length < 1 ? (
 							<p className={styles.empty}>There is no any authors...</p>
 						) : (
-							<ul>{authorsList}</ul>
+							<TransitionGroup component='ul'>{authorsList}</TransitionGroup>
 						)}
-						<AddNewAuthor authors={authors} />
 					</div>
 					<div className={styles.cell}>
-						<h3>Course authors</h3>
+						<div className={styles.title}>
+							<span>Course authors</span>
+						</div>
 						{courseAuthorsList.length < 1 ? (
 							<p className={styles.empty}>Please, add at least one author.</p>
 						) : (
-							<ul>{courseAuthorsList}</ul>
+							<TransitionGroup component='ul'>
+								{courseAuthorsList}
+							</TransitionGroup>
 						)}
 					</div>
 				</div>
 			</div>
+			{modal.isVisible === true && (
+				<Modal onClose={() => dispatch(closeModalAction())}>
+					<AddNewAuthor authors={authors} />
+				</Modal>
+			)}
 		</>
 	);
 };

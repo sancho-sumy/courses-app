@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { addNewAuthor } from '../../../../store/authors/thunk';
-import { setAlertAction } from '../../../../store/alert/actionCreators';
 import { useDispatch } from 'react-redux';
+import { setAlertAction } from '../../../../store/alert/actionCreators';
+import { closeModalAction } from '../../../../store/modal/actionCreators';
+import { addNewAuthor } from '../../../../store/authors/thunk';
 
 import { Button, Input } from '../../../../common';
 import {
@@ -47,13 +48,13 @@ const AddNewAuthor = ({ authors }) => {
 
 		if (response) {
 			setNewAuthorName('');
+			dispatch(closeModalAction());
 		}
 		setIsLoading(false);
 	};
 
 	return (
 		<form onSubmit={newAuthorSubmitHandler} className={styles.addNewAuthor}>
-			<h3>Add new author</h3>
 			<Input
 				id='author-name'
 				placeholderText={'Enter author name'}
