@@ -44,6 +44,9 @@ const mockedState = {
 			{ id: '2', name: 'Author 2' },
 		],
 	},
+	modal: {
+		isVisible: false,
+	},
 };
 
 const mockedStore = {
