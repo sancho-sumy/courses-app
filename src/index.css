@@ -128,3 +128,29 @@ textarea {
 		transform: translate(24px, 0);
 	}
 }
+
+.btn-spinner-dual-ring {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+	justify-content: center;
+	align-items: center;
+}
+.btn-spinner-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: btn-spinner-dual-ring 1.2s linear infinite;
+}
+@keyframes btn-spinner-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

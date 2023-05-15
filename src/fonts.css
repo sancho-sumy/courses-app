@@ -91,3 +91,6 @@
 .icon-login:before {
   content: "\e901";
 }
+.icon-search:before {
+  content: "\e986";
+}

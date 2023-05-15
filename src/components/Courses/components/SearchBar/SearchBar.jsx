@@ -1,6 +1,9 @@
 import { Form, useNavigation } from 'react-router-dom';
 import { Button, Input } from '../../../../common';
-import { SEARCH_BTN_TEXT, LOADING_BTN_SPINNER } from '../../../../constants';
+import {
+	SEARCH_BTN_ICON,
+	LOADING_BTN_SPINNER_CIRCLE,
+} from '../../../../constants';
 
 import styles from './SearchBar.module.css';
 
@@ -20,8 +23,9 @@ export const SearchBar = ({ onSubmit, onChange }) => {
 				onChange={onChange}
 			/>
 			<Button
-				buttonText={!searching ? SEARCH_BTN_TEXT : LOADING_BTN_SPINNER}
+				buttonText={!searching ? SEARCH_BTN_ICON : LOADING_BTN_SPINNER_CIRCLE}
 				type={'submit'}
+				size='small'
 				design='secondary'
 				isDisabled={searching}
 			/>

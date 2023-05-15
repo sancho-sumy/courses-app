@@ -21,6 +21,7 @@ export const EDIT_BTN_ICON = <span className='icon-pencil'></span>;
 export const ADD_BTN_ICON = <span className='icon-plus'></span>;
 export const CLOSE_BTN_ICON = <span className='icon-cross'></span>;
 export const LOGOUT_BTN_ICON = <span className='icon-logout'></span>;
+export const SEARCH_BTN_ICON = <span className='icon-search'></span>;
 export const LOADING_BTN_SPINNER = (
 	<div className='btn-spinner-ellipsis'>
 		<div></div>
@@ -28,4 +29,7 @@ export const LOADING_BTN_SPINNER = (
 		<div></div>
 		<div></div>
 	</div>
+);
+export const LOADING_BTN_SPINNER_CIRCLE = (
+	<div class='btn-spinner-dual-ring'></div>
 );

@@ -51,8 +51,9 @@
 
 .small {
 	display: flex;
+	width: 40px;
+	min-width: 40px;
 	justify-content: center;
 	align-items: center;
-	min-width: 40px;
 	font-size: 1.25rem;
 }
