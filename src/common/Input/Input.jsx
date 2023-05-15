@@ -11,7 +11,7 @@ export const Input = ({
 	max,
 }) => {
 	return (
-		<div>
+		<>
 			{labelText && <label htmlFor={id}>{labelText}</label>}
 			<input
 				id={id}
@@ -24,6 +24,6 @@ export const Input = ({
 				min={min}
 				max={max}
 			/>
-		</div>
+		</>
 	);
 };

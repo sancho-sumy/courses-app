@@ -6,7 +6,7 @@ import { Button } from '../../common';
 
 import { getCourses, getAuthors } from '../../store/selectors';
 import { getAuthorsList, pipeDuration } from '../../helpers';
-import { BACK_TO_COURSES_BTN_TEXT } from '../../constants';
+import { BACK_BTN_TEXT } from '../../constants';
 
 import styles from './CourseInfo.module.css';
 
@@ -24,7 +24,7 @@ const CourseInfo = () => {
 		<>
 			<div className={styles.header}>
 				<Link to='..' relative='path'>
-					<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
+					<Button buttonText={BACK_BTN_TEXT} design='secondary' size='medium' />
 				</Link>
 			</div>
 			<div className={styles.courseInfo}>
@@ -33,19 +33,21 @@ const CourseInfo = () => {
 					<p>{course.description}</p>
 				</div>
 				<div className={styles.info}>
-					<p>
-						<b>ID:</b> {courseId}
-					</p>
-					<p>
-						<b>Duration:</b> {pipeDuration(course.duration)} hours
-					</p>
-					<p>
-						<b>Created:</b> {course.creationDate}
-					</p>
-					<p>
-						<b>Authors:</b>
-					</p>
-					<div>
+					<div className={styles.infoText}>
+						<p>
+							<b>ID:</b> {courseId}
+						</p>
+						<p>
+							<b>Duration:</b> {pipeDuration(course.duration)} hours
+						</p>
+						<p>
+							<b>Created:</b> {course.creationDate}
+						</p>
+					</div>
+					<div className={styles.infoAuthors}>
+						<p>
+							<b>Authors:</b>
+						</p>
 						<ul>{authors}</ul>
 					</div>
 				</div>

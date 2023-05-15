@@ -20,11 +20,12 @@ import { courseSchema } from '../../schemas';
 import {
 	CREATE_COURSE_BTN_TEXT,
 	ADD_AUTHOR_BTN_TEXT,
-	DELETE_AUTHOR_BTN_TEXT,
 	UPDATE_COURSE_BTN_TEXT,
-	BACK_TO_COURSES_BTN_TEXT,
+	BACK_BTN_TEXT,
 	LOADING_BTN_SPINNER,
 	ADD_BTN_ICON,
+	REMOVE_BTN_TEXT,
+	EDIT_BTN_ICON,
 } from '../../constants';
 
 import styles from './CourseForm.module.css';
@@ -149,7 +150,7 @@ const CourseForm = () => {
 					<AuthorsList
 						id={authorId}
 						name={authors.find((author) => author.id === authorId)?.name}
-						buttonText={DELETE_AUTHOR_BTN_TEXT}
+						buttonText={REMOVE_BTN_TEXT}
 						onBtnClick={deleteCourseAuthorHandler.bind(this, authorId)}
 					/>
 				</CSSTransition>
@@ -162,38 +163,46 @@ const CourseForm = () => {
 			<div className={styles.header}>
 				<div>
 					<Link to='/courses'>
-						<Button buttonText={BACK_TO_COURSES_BTN_TEXT} design='secondary' />
+						<Button
+							buttonText={BACK_BTN_TEXT}
+							design='secondary'
+							size='medium'
+						/>
 					</Link>
 				</div>
 			</div>
 			<div className={styles.courseForm}>
 				<form onSubmit={courseSubmitHandler} className={styles.course}>
-					<Input
-						id='title'
-						name='title'
-						labelText={'Title'}
-						placeholderText={'Enter title'}
-						defaultValue={course.title}
-						parameters={'required'}
-					/>
-					{location.pathname === '/courses/add' && (
-						<Button
-							buttonText={
-								!isLoading ? CREATE_COURSE_BTN_TEXT : LOADING_BTN_SPINNER
-							}
-							type='submit'
-							isDisabled={isLoading}
+					<div className={styles.title}>
+						<Input
+							id='title'
+							name='title'
+							labelText={'Title'}
+							placeholderText={'Enter title'}
+							defaultValue={course.title}
+							parameters={'required'}
 						/>
-					)}
-					{location.pathname === `/courses/update/${courseId}` && (
-						<Button
-							buttonText={
-								!isLoading ? UPDATE_COURSE_BTN_TEXT : LOADING_BTN_SPINNER
-							}
-							type='submit'
-							isDisabled={isLoading}
-						/>
-					)}
+					</div>
+					<div className={styles.createButton}>
+						{location.pathname === '/courses/add' && (
+							<Button
+								buttonText={
+									!isLoading ? CREATE_COURSE_BTN_TEXT : LOADING_BTN_SPINNER
+								}
+								type='submit'
+								isDisabled={isLoading}
+							/>
+						)}
+						{location.pathname === `/courses/update/${courseId}` && (
+							<Button
+								buttonText={
+									!isLoading ? UPDATE_COURSE_BTN_TEXT : LOADING_BTN_SPINNER
+								}
+								type='submit'
+								isDisabled={isLoading}
+							/>
+						)}
+					</div>
 					<div className={styles.description}>
 						<Textarea
 							id='description'
@@ -218,12 +227,12 @@ const CourseForm = () => {
 					</div>
 				</form>
 				<div className={styles.authors}>
-					<div className={styles.cell}>
+					<div className={styles.availableAuthors}>
 						<div className={styles.title}>
 							<span className={styles.text}>Available authors</span>
 							<span className={styles.controls}>
 								<Button
-									buttonText={ADD_BTN_ICON}
+									buttonText={EDIT_BTN_ICON}
 									size='small'
 									design='secondary'
 									onClick={() => dispatch(openModalAction())}
@@ -236,7 +245,7 @@ const CourseForm = () => {
 							<TransitionGroup component='ul'>{authorsList}</TransitionGroup>
 						)}
 					</div>
-					<div className={styles.cell}>
+					<div className={styles.courseAuthors}>
 						<div className={styles.title}>
 							<span className={styles.text}>Course authors</span>
 						</div>

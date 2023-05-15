@@ -1,31 +1,36 @@
 .listItem {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  padding: 0 100px;
-  margin-bottom: 10px;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	list-style: none;
+	margin-bottom: 10px;
 }
 
 .name {
-  min-width: 50%;
+	min-width: 50%;
 }
 
 .fade-enter {
-  opacity: 0;
+	opacity: 0;
 }
 
 .fade-enter-active {
-  opacity: 1;
-  transition: opacity 0.5s ease-out;
+	opacity: 1;
+	transition: opacity 0.5s ease-out;
 }
 
 .fade-exit {
-  opacity: 1;
+	opacity: 1;
 }
 
 .fade-exit-active {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
+	opacity: 0;
+	transition: opacity 0.5s ease-out;
+}
+
+@media (min-width: 425px) {
+	.listItem {
+		justify-content: center;
+	}
 }

@@ -1,17 +1,19 @@
 header {
 	display: grid;
-	grid-template-columns: minmax(100px, 1fr) auto 50px auto;
-  gap: 20px;
+	grid-template-columns: minmax(100px, 1fr) auto;
+	gap: 20px;
 	align-items: center;
 	padding: 15px 25px;
 }
 .logo img {
 	display: block;
 	width: 130px;
-  object-fit: contain;
+	height: 55px;
+	object-fit: contain;
 }
 
 .userName {
+	display: none;
 	width: 100%;
 	font-size: 1.1rem;
 	font-weight: 500;
@@ -20,7 +22,7 @@ header {
 }
 
 .avatar {
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 	width: 50px;
@@ -35,4 +37,18 @@ header {
 
 .controls {
 	width: 100%;
+}
+
+@media (min-width: 425px) {
+	header {
+		grid-template-columns: minmax(100px, 1fr) auto 50px auto;
+	}
+
+	.userName {
+		display: block;
+	}
+
+	.avatar {
+		display: flex;
+	}
 }

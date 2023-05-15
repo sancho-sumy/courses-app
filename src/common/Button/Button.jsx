@@ -13,6 +13,7 @@ export const Button = ({
 		<button
 			className={clsx(styles.btn, {
 				[styles.standard]: size === 'standard',
+				[styles.medium]: size === 'medium',
 				[styles.small]: size === 'small',
 				[styles.primary]: design === 'primary',
 				[styles.secondary]: design === 'secondary',

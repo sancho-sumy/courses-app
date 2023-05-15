@@ -1,38 +1,37 @@
 .courseInfo {
-	display: grid;
-	grid-template-columns: 4fr minmax(250px, 2fr);
-	gap: 30px 50px;
-	padding: 20px 40px;
+	display: block;
+	min-height: 250px;
+	padding: 15px;
+	margin-top: 20px;
 	background: #ffffff;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
-	border-radius: 16px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 8px;
 }
 
 .header {
 	width: fit-content;
 	padding: 0 25px;
-	margin-bottom: 15px;
 }
 
 .courseInfo .description {
-	padding: 0 0 20px 0; 
+	padding: 0 0 20px 0;
 	line-height: 1.5rem;
 	text-align: justify;
 }
 
 .courseInfo ul {
-  padding: 0 15px;
-  list-style: none;
+	padding: 0 15px;
+	list-style: none;
 }
 
-.courseInfo ul li{
-  margin-bottom: 10px;
+.courseInfo ul li {
+	margin-bottom: 10px;
 }
 
 .title {
-  grid-column: span 2;
-  text-align: center;
-  margin-bottom: 20px;
+	grid-column: span 2;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .controls {
@@ -43,17 +42,79 @@
 }
 
 .info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	min-width: 290px;
 	height: fit-content;
 	padding: 20px;
 	box-shadow: 0px 1px 4px rgba(107, 107, 107, 0.2);
 	border-radius: 8px;
 }
 
-.info p {
-  white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-  margin-bottom: 10px;
+.infoText {
+	width: 100%;
 }
 
+.info p {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 10px;
+}
 
+@media (min-width: 425px) {
+	.courseInfo {
+		padding: 20px 25px;
+	}
+
+	.header {
+		margin: 0;
+	}
+}
+
+@media (min-width: 768px) {
+	.courseInfo {
+		padding: 30px;
+	}
+
+	.info {
+		gap: 50px;
+		flex-wrap: nowrap;
+	}
+
+	.infoText {
+		width: 50%;
+	}
+
+	.infoAuthors {
+		width: 50%;
+	}
+}
+
+@media (min-width: 1024px) {
+	.courseInfo {
+		display: grid;
+		grid-template-columns: 4fr minmax(250px, 2fr);
+		gap: 30px 50px;
+		padding: 20px 40px;
+	}
+
+	.header {
+		padding: 0 25px;
+		margin-bottom: 15px;
+	}
+
+	.info {
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.infoText {
+		width: 100%;
+	}
+
+	.infoAuthors {
+		width: 100%;
+	}
+}

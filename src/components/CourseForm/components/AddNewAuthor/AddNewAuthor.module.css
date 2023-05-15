@@ -1,9 +1,17 @@
 .addNewAuthor {
 	display: grid;
-	grid-template-columns: minmax(150px, 1fr) auto;
-	row-gap: 0;
-	column-gap: 20px;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	justify-items: center;
 	padding: 20px;
+}
+
+@media (min-width: 768px) {
+	.addNewAuthor {
+		display: grid;
+		grid-template-columns: minmax(150px, 1fr) auto;
+		padding: 20px;
+	}
 }
 
 

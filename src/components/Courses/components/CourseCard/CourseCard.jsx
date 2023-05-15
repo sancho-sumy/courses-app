@@ -35,21 +35,23 @@ export const CourseCard = ({
 				<p>{description}</p>
 			</div>
 			<div className={styles.info}>
-				<p>
-					<span>Authors:</span> {authors}
-				</p>
-				<p>
-					<span>Duration:</span> {duration}
-				</p>
-				<p>
-					<span>Created:</span> {creationDate}
-				</p>
-				<div className={styles.controls}>
+				<div className={styles.infoText}>
+					<p>
+						<span>Authors:</span> {authors}
+					</p>
+					<p>
+						<span>Duration:</span> {duration}
+					</p>
+					<p>
+						<span>Created:</span> {creationDate}
+					</p>
+				</div>
+				<div className={styles.infoControls}>
 					<Link to={id}>
 						<Button buttonText={SHOW_COURSE_BTN_TEXT} />
 					</Link>
 					{role === 'admin' && (
-						<>
+						<div className={styles.adminControls}>
 							<Link to={`update/${id}`}>
 								<Button
 									buttonText={EDIT_BTN_ICON}
@@ -63,7 +65,7 @@ export const CourseCard = ({
 								size='small'
 								design='secondary'
 							/>
-						</>
+						</div>
 					)}
 				</div>
 			</div>

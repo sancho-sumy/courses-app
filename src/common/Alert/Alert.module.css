@@ -3,12 +3,12 @@
 	top: -100%;
 	left: 50%;
 	transform: translateX(-50%);
-	width: 40%;
+	width: 95%;
 	padding: 10px 50px;
 	animation: slideInTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 12px;
-	margin: 15px;
+	margin-top: 15px;
 	z-index: 100;
 }
 
@@ -54,5 +54,23 @@
 	100% {
 		top: -100%;
 		opacity: 0;
+	}
+}
+
+@media (min-width: 425px) {
+	.alert {
+		width: 60%;
+	}
+}
+
+@media (min-width: 768px) {
+	.alert {
+		width: 50%;
+	}
+}
+
+@media (min-width: 1024px) {
+	.alert {
+		width: 40%;
 	}
 }

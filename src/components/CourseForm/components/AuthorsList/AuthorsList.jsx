@@ -7,7 +7,7 @@ const AuthorsList = ({ name, buttonText, onBtnClick }) => {
 		<li className={styles.listItem}>
 			<p className={styles.name}>{name}</p>
 			<div className={styles.controls}>
-				<Button buttonText={buttonText} onClick={onBtnClick} />
+				<Button buttonText={buttonText} onClick={onBtnClick} size='medium' />
 			</div>
 		</li>
 	);

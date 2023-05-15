@@ -1,23 +1,13 @@
 .course {
 	display: grid;
-	grid-template-columns: 4fr minmax(250px, 2fr);
-	gap: 150px;
-	padding: 20px;
-	margin-top: 25px;
+	min-height: 250px;
+	grid-template-columns: 1fr;
+	gap: 15px;
+	padding: 15px;
+	margin-top: 20px;
 	background: #ffffff;
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 8px;
-}
-
-.description p {
-	display: -webkit-box;
-	-webkit-line-clamp: 8;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-.title {
-	margin-bottom: 20px;
 }
 
 .course p {
@@ -28,24 +18,108 @@
 	font-weight: 500;
 }
 
-.controls {
+.description {
+	width: 100%;
+}
+
+.description p {
+	display: -webkit-box;
+	-webkit-line-clamp: 8;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-align: justify;
+}
+
+.title {
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.info {
+	display: flex;
+	flex-wrap: wrap;
+	min-width: 270px;
+	height: fit-content;
+	align-self: center;
+	padding: 15px;
+	box-shadow: 0px 1px 4px rgba(107, 107, 107, 0.2);
+	border-radius: 8px;
+}
+
+.infoText {
+	width: 100%;
+}
+
+.infoText p {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.infoControls {
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 	gap: 15px;
 	justify-content: center;
 	align-content: center;
 	margin-top: 15px;
 }
 
-.info {
-	height: fit-content;
-	padding: 20px;
-	box-shadow: 0px 1px 4px rgba(107, 107, 107, 0.2);
-	border-radius: 8px;
+.adminControls {
+	display: flex;
+	gap: 15px;
+	justify-content: center;
+	align-content: center;
 }
 
-.info p {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+@media (min-width: 768px) {
+	.course {
+		padding: 20px;
+	}
+
+	.info {
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		padding: 25px;
+	}
+
+	.title {
+		margin-bottom: 20px;
+		text-align: left;
+	}
+
+	.infoText {
+		width: 50%;
+	}
+
+	.infoControls {
+		width: 50%;
+	}
+}
+
+@media (min-width: 1024px) {
+	.course {
+		grid-template-columns: 4fr minmax(250px, 2fr);
+		gap: 50px;
+		padding: 25px;
+		margin-top: 25px;
+	}
+	.info {
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.title {
+		margin-bottom: 20px;
+	}
+
+	.infoText {
+		width: 100%;
+	}
+
+	.infoControls {
+		width: 100%;
+	}
 }
