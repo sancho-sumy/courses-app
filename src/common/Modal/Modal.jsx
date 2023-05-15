@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom';
 
-import styles from './Modal.module.css';
 import { Button } from '../Button';
 import { CLOSE_BTN_ICON } from '../../constants';
+
+import styles from './Modal.module.css';
 
 const Backdrop = ({ onClose }) => {
 	return <div className={styles.backdrop} onClick={onClose}></div>;
